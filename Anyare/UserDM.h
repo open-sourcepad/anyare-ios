@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface UserDM : NSObject
-
+@property (nonatomic) int userId;
+@property (strong, nonatomic) NSString *deviceToken;
+@property (strong, nonatomic) NSString *authenticationToken;
+@property (strong, nonatomic) NSString *email;
 @end

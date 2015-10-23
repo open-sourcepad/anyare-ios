@@ -9,11 +9,14 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "UserDM.h"
+#import "UserController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface LoginViewController () <FBSDKLoginButtonDelegate>
+@interface LoginViewController () <FBSDKLoginButtonDelegate, UserControllerDelegate>
 @property (strong, nonatomic) FBSDKLoginButton *loginButton;
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @end
 
 @implementation LoginViewController
@@ -21,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.loginButton];
@@ -48,12 +53,27 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:DEFAULT_USER_LOGGED_IN];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate goToHome];
+    // Login user
+    UserDM *user = [[UserDM alloc] init];
+    user.deviceToken = _appDelegate.deviceToken;
+    [UserController signInUser:self user:user];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
     
+}
+#pragma mark - User controller delegate
+- (void)signInUserDidFinish:(UserController *)controller resultDict:(NSDictionary *)resultDict
+{
+    // Save current user
+    NSDictionary *userDict = [resultDict objectForKey:@"user"];
+    UserDM *user = [[UserDM alloc] init];
+    user.userId = [[userDict objectForKey:@"id"] intValue];
+    user.email = [userDict objectForKey:@"email"];
+    user.authenticationToken = [userDict objectForKey:@"auth_token"];
+    _appDelegate.currentUser = user;
+    
+    [_appDelegate goToHome];
 }
 @end

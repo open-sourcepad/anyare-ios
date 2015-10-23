@@ -22,6 +22,11 @@
 		E8A9E6EB1BDA14390075C580 /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6EA1BDA14390075C580 /* Map@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6EE1BDA14B50075C580 /* PostController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A9E6ED1BDA14B50075C580 /* PostController.m */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6F01BDA1BB60075C580 /* broken_road.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6EF1BDA1BB60075C580 /* broken_road.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6F31BDA1CD70075C580 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A9E6F21BDA1CD70075C580 /* UserController.m */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6F61BDA26CF0075C580 /* drugs.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F41BDA26CF0075C580 /* drugs.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F51BDA26CF0075C580 /* vandalism.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6FA1BDA2BFA0075C580 /* assault.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F81BDA2BFA0075C580 /* assault.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6FB1BDA2BFA0075C580 /* pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F91BDA2BFA0075C580 /* pipe.png */; settings = {ASSET_TAGS = (); }; };
 		E8D81A6B1BD8BDE7008FC2D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6A1BD8BDE7008FC2D1 /* main.m */; };
 		E8D81A6E1BD8BDE7008FC2D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6D1BD8BDE7008FC2D1 /* AppDelegate.m */; };
 		E8D81A711BD8BDE7008FC2D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A701BD8BDE7008FC2D1 /* ViewController.m */; };
@@ -77,6 +82,12 @@
 		E8A9E6EC1BDA14B50075C580 /* PostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostController.h; sourceTree = "<group>"; };
 		E8A9E6ED1BDA14B50075C580 /* PostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostController.m; sourceTree = "<group>"; };
 		E8A9E6EF1BDA1BB60075C580 /* broken_road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = broken_road.png; path = Images/Categories/broken_road.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6F11BDA1CD70075C580 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
+		E8A9E6F21BDA1CD70075C580 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		E8A9E6F41BDA26CF0075C580 /* drugs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drugs.png; path = Images/Categories/drugs.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6F51BDA26CF0075C580 /* vandalism.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vandalism.png; path = Images/Categories/vandalism.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6F81BDA2BFA0075C580 /* assault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = assault.png; path = Images/Categories/assault.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6F91BDA2BFA0075C580 /* pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pipe.png; path = Images/Categories/pipe.png; sourceTree = SOURCE_ROOT; };
 		E8D81A661BD8BDE7008FC2D1 /* Anyare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anyare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D81A6A1BD8BDE7008FC2D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E8D81A6C1BD8BDE7008FC2D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -194,10 +205,14 @@
 		E8A9E6DD1BDA0ACD0075C580 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				E8A9E6F81BDA2BFA0075C580 /* assault.png */,
+				E8A9E6F91BDA2BFA0075C580 /* pipe.png */,
 				E8A9E6EF1BDA1BB60075C580 /* broken_road.png */,
+				E8A9E6F41BDA26CF0075C580 /* drugs.png */,
 				E8A9E6DE1BDA0AEC0075C580 /* fire-cat.png */,
 				E8A9E6DF1BDA0AEC0075C580 /* flood.png */,
 				E8A9E6E01BDA0AEC0075C580 /* theft.png */,
+				E8A9E6F51BDA26CF0075C580 /* vandalism.png */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -304,6 +319,8 @@
 			children = (
 				E8A9E6EC1BDA14B50075C580 /* PostController.h */,
 				E8A9E6ED1BDA14B50075C580 /* PostController.m */,
+				E8A9E6F11BDA1CD70075C580 /* UserController.h */,
+				E8A9E6F21BDA1CD70075C580 /* UserController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -490,9 +507,13 @@
 				E8A9E6E21BDA0AEC0075C580 /* flood.png in Resources */,
 				E8D81A761BD8BDE7008FC2D1 /* Assets.xcassets in Resources */,
 				E8A9E6EB1BDA14390075C580 /* Map@2x.png in Resources */,
+				E8A9E6FB1BDA2BFA0075C580 /* pipe.png in Resources */,
 				E8A9E6E11BDA0AEC0075C580 /* fire-cat.png in Resources */,
 				E8D81A741BD8BDE7008FC2D1 /* Main.storyboard in Resources */,
+				E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */,
+				E8A9E6F61BDA26CF0075C580 /* drugs.png in Resources */,
 				E8A9E6E31BDA0AEC0075C580 /* theft.png in Resources */,
+				E8A9E6FA1BDA2BFA0075C580 /* assault.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +579,7 @@
 				E8D81AB71BD8C9E2008FC2D1 /* UserDM.m in Sources */,
 				E8A9E6EE1BDA14B50075C580 /* PostController.m in Sources */,
 				E8D81AAF1BD8C90A008FC2D1 /* PostViewController.m in Sources */,
+				E8A9E6F31BDA1CD70075C580 /* UserController.m in Sources */,
 				E8D81AAC1BD8C8F3008FC2D1 /* MapViewController.m in Sources */,
 				E8A9E6DC1BD9FB640075C580 /* TemplateViewController.m in Sources */,
 				E8A9E6E61BDA0F5E0075C580 /* CategoryButton.m in Sources */,
