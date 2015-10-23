@@ -26,10 +26,14 @@
 + (void)getPostsInLocationWithDelegate:(id <PostControllerDelegate>)delegate
                               location:(CGPoint)locationCoordinate
                              authToken:(NSString *)authenticationToken;
++ (void)duplicatePostWithDelegate:(id <PostControllerDelegate>)delegate
+                          post:(PostDM *)post
+                     userToken:(NSString *)userToken;
 @end
 
 @protocol PostControllerDelegate <NSObject>
 @optional
 - (void)createPostDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict;
+- (void)duplicatePostDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict;
 - (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict;
 @end

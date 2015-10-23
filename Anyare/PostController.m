@@ -36,6 +36,15 @@ static PostController *singleton = nil;
     [controller createPost:post userToken:userToken];
 }
 
++ (void)duplicatePostWithDelegate:(id <PostControllerDelegate>)delegate
+                          post:(PostDM *)post
+                     userToken:(NSString *)userToken
+{
+    PostController *controller = [PostController getInstance];
+    controller.delegate = delegate;
+    [controller duplicatePost:post userToken:userToken];
+}
+
 #pragma mark - Request Methods
 - (void)createPost:(PostDM *)post userToken:(NSString *)userToken
 {
@@ -98,6 +107,34 @@ static PostController *singleton = nil;
     }
 
 
+}
+
+- (void)duplicatePost:(PostDM *)post userToken:(NSString *)userToken
+{
+    RKObjectManager *objMgr = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).apiObjMgr;
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:userToken forKey:@"auth_token"];
+    [params setObject:[[NSNumber numberWithInt:post.postId] stringValue] forKey:@"post_id"];
+    [params setObject:@"repost" forKey:@"action_type"];
+    
+    
+                            NSLog(@"Response: %d", post.postId);
+    [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
+    [objMgr.HTTPClient postPath:API_CREATE_POST
+                     parameters:params
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSError *error;
+                            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
+                            NSLog(@"Response: %@", responseDict);
+                            
+                            if ([delegate respondsToSelector:@selector(duplicatePostDidFinish:resultDict:)])
+                                [delegate performSelector:@selector(duplicatePostDidFinish:resultDict:) withObject:self withObject:responseDict];
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"Error: %@", error.localizedDescription);
+                        }];
+    
 }
 
 + (void)getPostsInLocationWithDelegate:(id <PostControllerDelegate>)delegate

@@ -8,8 +8,14 @@
 
 #import "DuplicateViewController.h"
 #import "PostTableViewCell.h"
+#import "PostController.h"
+#import "Constants.h"
+#import "PostDM.h"
+#import "UserDM.h"
+#import "AppDelegate.h"
 
-@interface DuplicateViewController ()  <UITableViewDataSource, UITableViewDelegate>
+@interface DuplicateViewController ()  <UITableViewDataSource, UITableViewDelegate, PostControllerDelegate>
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) UITableView *mainTableView;
 @end
 
@@ -19,8 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"Same Report?";
     [self.view addSubview:self.mainTableView];
+
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,12 +64,19 @@
 #pragma mark - Table View Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.posts.count;
+    return _posts.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0;
+    // Check if post has details
+    PostDM *post = [_posts objectAtIndex:indexPath.row];
+    if(post.detailed)
+        return TIMELINE_WITH_IMAGE_TEXT_CELL_ROW_HEIGHT;
+    else if(post.details.length)
+        return TIMELINE_WITH_TEXT_CELL_ROW_HEIGHT;
+    else
+        return TIMELINE_CELL_ROW_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,6 +87,16 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PostDM *post = [_posts objectAtIndex:indexPath.row];
+    [PostController duplicatePostWithDelegate:self post:post userToken:_appDelegate.currentUser.authenticationToken];
+}
+
+- (void)duplicatePostDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 
 @end

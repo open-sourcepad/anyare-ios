@@ -220,6 +220,8 @@
     BOOL isNewPost = [[resultDict objectForKey:@"new_post"] boolValue];
     
     if (isNewPost) {
+        // Force map reload after posting
+        [_appDelegate.mapVC reloadMapAt:_appDelegate.currentLocationCoordinate];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         NSDictionary *data = [resultDict objectForKey:@"data"];
@@ -228,10 +230,6 @@
         [self gotoDuplicateCtrl:posts];
     }
     
-    // Force map reload after posting
-    [_appDelegate.mapVC reloadMapAt:_appDelegate.currentLocationCoordinate];
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
