@@ -28,7 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _firstLoad = YES;
     self.navTitle = @"Map";
 }
@@ -44,6 +43,13 @@
 }
 
 #pragma mark - Accessor
+- (AppDelegate *)appDelegate {
+    if(!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
+}
+
 - (MGLMapView *)mapView {
     if(!_mapView) {
         //_mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds];
@@ -71,6 +77,10 @@
 
 - (void)reloadMapAt:(CGPoint)point
 {
+    // Reload only if the user has already signed in
+    if(!self.appDelegate.currentUser.authenticationToken)
+        return;
+    
     _currentPoint = point;
     [PostController getPostsInLocationWithDelegate:self
                                           location:point
@@ -132,7 +142,6 @@
     NSLog(@"Region did change (%f,%f)", mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
     CGPoint newPoint = CGPointMake(mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
 
-    //if(_currentPoint.x != newPoint.x || _currentPoint.y != newPoint.y)
     if(![[NSString stringWithFormat:@"%.3f", _currentPoint.x] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.x]] ||
        ![[NSString stringWithFormat:@"%.3f", _currentPoint.y] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.y]])
         [self reloadMapAt:newPoint];
