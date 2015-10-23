@@ -49,14 +49,54 @@ static PostController *singleton = nil;
     [params setObject:[[NSNumber numberWithFloat:post.latitude] stringValue] forKey:@"post[latitude]"];
     [params setObject:[[NSNumber numberWithFloat:post.longitude] stringValue] forKey:@"post[longitude]"];
 
+    if (post.image) {
+        NSLog(@"pasok!");
+        // Construct filename from user id and date/time + index
+        NSString *filename = [NSString stringWithFormat:@"photo.png"];
+        
+        UIImage *image = post.image;
+        NSMutableURLRequest *request = [objMgr.HTTPClient multipartFormRequestWithMethod:@"POST"
+                                                                                    path:API_CREATE_POST
+                                                                              parameters:params
+                                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                                                   [formData appendPartWithFileData:UIImagePNGRepresentation(image)
+                                                                                               name:@"photo[image]"
+                                                                                           fileName:filename
+                                                                                           mimeType:@"image/png"];
+                                                               }
+                                        ];
+        [objMgr.HTTPClient enqueueBatchOfHTTPRequestOperationsWithRequests:[NSArray arrayWithObject:request]
+                                                             progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+                                                                 NSLog(@"Progress %d of %d", (int)numberOfFinishedOperations, (int)totalNumberOfOperations);
+                                                             }
+                                                           completionBlock:^(NSArray *operations) {
+                                                               AFHTTPRequestOperation *operation = [operations objectAtIndex:0];
+                                                               NSError *error;
+                                                               NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
+
+                                                               NSLog(@"Response: %@", responseDict);
+
+                                                               if ([delegate respondsToSelector:@selector(createPostDidFinish:resultDict:)])
+                                                                   [delegate performSelector:@selector(createPostDidFinish:resultDict:) withObject:self withObject:responseDict];
+                                                           }];
+    }else {
     
-    [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
-    [objMgr.HTTPClient postPath:API_CREATE_POST
-                    parameters:params
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                           NSLog(@"Error: %@", error.localizedDescription);
-                       }];
+        [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
+        [objMgr.HTTPClient postPath:API_CREATE_POST
+                        parameters:params
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSError *error;
+                                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
+                                NSLog(@"Response: %@", responseDict);
+
+                                if ([delegate respondsToSelector:@selector(createPostDidFinish:resultDict:)])
+                                    [delegate performSelector:@selector(createPostDidFinish:resultDict:) withObject:self withObject:responseDict];
+
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"Error: %@", error.localizedDescription);
+                            }];
+    }
+
 
 }
 

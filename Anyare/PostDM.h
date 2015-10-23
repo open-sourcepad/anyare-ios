@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface PostDM : NSObject
 @property (nonatomic) int postId;
@@ -14,5 +15,6 @@
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 @property (strong, nonatomic) NSString *details;
+@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSDate *dateTime;
 @end
