@@ -54,7 +54,10 @@
 - (UITableView *)mainTableView
 {
     if(!_mainTableView) {
-        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0,
+                                                                       0.0,
+                                                                       self.view.frame.size.width,
+                                                                       self.view.frame.size.height-_appDelegate.tabController.tabBar.frame.size.height)];
         _mainTableView.dataSource = self;
         _mainTableView.delegate = self;
         _mainTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
