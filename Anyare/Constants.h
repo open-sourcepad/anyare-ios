@@ -8,7 +8,7 @@
 
 // DIMENSION
 #define SCREEN_WIDTH                                [[UIScreen mainScreen] bounds].size.width
-
+#define SCREEN_HEIGHT                               [[UIScreen mainScreen] bounds].size.height
 // API
 #define API_BASE_URL                                @"http://halloween-penguin.herokuapp.com"
 #define API_HEADER                                  @"application/vnd.halloween-penguin+json;version=1"
@@ -26,7 +26,7 @@
 #define UIColorFromRGB(rgbValue)                    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define UIColorFromRGBWithAlpha(rgbValue,a)         [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
-#define COLOR_THEME                                 RGB(244,155,61)
+#define COLOR_THEME                                 RGB(34, 213, 158)//RGB(244,155,61)
 
 // DEFAULTS
 #define DEFAULT_USER_LOGGED_IN                      @"user is logged in"
