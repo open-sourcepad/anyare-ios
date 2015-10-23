@@ -34,8 +34,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     self.navigationItem.title = _navTitle;
+    [self closeButtonAction:nil];
 
 }
 
