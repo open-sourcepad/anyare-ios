@@ -16,7 +16,6 @@
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) UITableView *mainTableView;
-@property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @end
 
@@ -37,11 +36,12 @@
     
     [self.view bringSubviewToFront:self.postButton];
     [_mainTableView reloadData];
-    
-    if(!self.posts.count) {
+
+    // Refresh posts
+    if(_appDelegate.currentUser.authenticationToken) {
         [PostController getPostsInLocationWithDelegate:self
-                                              location:_appDelegate.currentLocationCoordinate
-                                             authToken:_appDelegate.currentUser.authenticationToken];
+                                              location:_appDelegate.mapCurrentPoint
+                                             authToken:_appDelegate.currentUser.authenticationToken];        
     }
 }
 
@@ -62,27 +62,24 @@
         _mainTableView.delegate = self;
         _mainTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [_mainTableView registerClass:[PostTableViewCell class] forCellReuseIdentifier:@"PostCell"];
+        
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectZero];
+        _mainTableView.tableFooterView = footerView;
+        footerView = nil;
     }
     return _mainTableView;
-}
-
-- (NSMutableArray *)posts {
-    if(!_posts) {
-        _posts = [[NSMutableArray alloc] init];
-    }
-    return _posts;
 }
 
 #pragma mark - Table View Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _posts.count;
+    return _appDelegate.loadedPosts.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Check if post has details
-    PostDM *post = [_posts objectAtIndex:indexPath.row];
+    PostDM *post = [_appDelegate.loadedPosts objectAtIndex:indexPath.row];
     if(post.detailed)
         return TIMELINE_WITH_IMAGE_TEXT_CELL_ROW_HEIGHT;
     else if(post.details.length)
@@ -95,14 +92,14 @@
 {
     static NSString *CellIdentifier = @"PostCell";
     PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [cell createCellWithPost:[_posts objectAtIndex:indexPath.row]];
+    [cell createCellWithPost:[_appDelegate.loadedPosts objectAtIndex:indexPath.row]];
     return cell;
 }
 
 #pragma mark - Post Controller Delegate
 - (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
 {
-    _posts = [NSMutableArray arrayWithArray:[PostDM getPostsFromArray:(NSArray *)resultDict]];
+    _appDelegate.loadedPosts = [NSMutableArray arrayWithArray:[PostDM getPostsFromArray:(NSArray *)resultDict]];
     [_mainTableView reloadData];
 }
 @end

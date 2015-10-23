@@ -35,6 +35,10 @@
 @property (nonatomic) CGPoint currentLocationCoordinate;
 @property (nonatomic) BOOL isLocationDetected;
 
+// Posts
+@property (strong, nonatomic) NSMutableArray *loadedPosts;
+@property (nonatomic) CGPoint mapCurrentPoint;
+
 - (void)goToLogin;
 - (void)goToHome;
 - (void)logoutUser;
