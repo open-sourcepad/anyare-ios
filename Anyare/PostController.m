@@ -60,7 +60,7 @@ static PostController *singleton = nil;
                                                                               parameters:params
                                                                constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                                                    [formData appendPartWithFileData:UIImagePNGRepresentation(image)
-                                                                                               name:@"photo[image]"
+                                                                                               name:@"post[image]"
                                                                                            fileName:filename
                                                                                            mimeType:@"image/png"];
                                                                }
