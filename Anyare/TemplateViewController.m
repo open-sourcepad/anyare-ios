@@ -66,8 +66,7 @@
         _categoryPopupView.layer.cornerRadius = 10.0;
         _categoryPopupView.alpha = 0;
         _categoryPopupView.center = CGPointMake(self.view.frame.size.width/2, _categoryPopupView.center.y);
-        
-        [_categoryPopupView addSubview:self.closeButton];
+        _categoryPopupView.userInteractionEnabled = YES;
         
         // Add category buttons
         CGFloat x = 15.0;
@@ -80,6 +79,7 @@
                                                                         _categoryPopupView.frame.size.height)];
         subPopupView.backgroundColor = [UIColor clearColor];
         [_categoryPopupView addSubview:subPopupView];
+        [_categoryPopupView addSubview:self.closeButton];
         
         for (int i=0; i<NUMBER_OF_CATEGORIES; i++) {
             CategoryButton *categoryBtn = [[CategoryButton alloc] initWithFrame:CGRectMake(x, y, dimension, dimension)];
@@ -171,7 +171,8 @@
 
 - (void)closeButtonAction:(id)sender
 {
-    
+    _categoryPopupView.alpha = 0;
+    // To do: animate
 }
 
 #pragma mark - Private
