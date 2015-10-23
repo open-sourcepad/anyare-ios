@@ -163,7 +163,7 @@
     if(!_timelineNavController) {
         _timelineNavController = [[UINavigationController alloc] initWithRootViewController:self.timelineVC];
         _timelineNavController.title = @"Timeline";
-        //_timelineNavController.tabBarItem.image = [UIImage imageNamed:@""];
+        _timelineNavController.tabBarItem.image = [UIImage imageNamed:@"Timeline.png"];
     }
     return _timelineNavController;
 }
