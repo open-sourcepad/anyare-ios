@@ -15,7 +15,7 @@
 		C66E2AD01BDA5E260011DB1F /* DuplicateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66E2ACF1BDA5E260011DB1F /* DuplicateViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DAAD8D61B3C78EC9759247C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DD9803F0E5641F57BF4D4C2 /* libPods.a */; };
 		E807879A1BDA465700825584 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = E80787991BDA465700825584 /* send.png */; settings = {ASSET_TAGS = (); }; };
-		E80787A41BDA594D00825584 /* accident-png.png in Resources */ = {isa = PBXBuildFile; fileRef = E807879C1BDA594D00825584 /* accident-png.png */; settings = {ASSET_TAGS = (); }; };
+		E80787A41BDA594D00825584 /* accident-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = E807879C1BDA594D00825584 /* accident-pin.png */; settings = {ASSET_TAGS = (); }; };
 		E80787A51BDA594D00825584 /* assault-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = E807879D1BDA594D00825584 /* assault-pin.png */; settings = {ASSET_TAGS = (); }; };
 		E80787A61BDA594D00825584 /* drugs-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = E807879E1BDA594D00825584 /* drugs-pin.png */; settings = {ASSET_TAGS = (); }; };
 		E80787A71BDA594D00825584 /* flood-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = E807879F1BDA594D00825584 /* flood-pin.png */; settings = {ASSET_TAGS = (); }; };
@@ -93,7 +93,7 @@
 		C66E2ACF1BDA5E260011DB1F /* DuplicateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuplicateViewController.m; sourceTree = "<group>"; };
 		D9ABC2F1A73EC05C40840BBD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E80787991BDA465700825584 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send.png; path = Images/send.png; sourceTree = SOURCE_ROOT; };
-		E807879C1BDA594D00825584 /* accident-png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accident-png.png"; sourceTree = "<group>"; };
+		E807879C1BDA594D00825584 /* accident-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accident-pin.png"; sourceTree = "<group>"; };
 		E807879D1BDA594D00825584 /* assault-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "assault-pin.png"; sourceTree = "<group>"; };
 		E807879E1BDA594D00825584 /* drugs-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drugs-pin.png"; sourceTree = "<group>"; };
 		E807879F1BDA594D00825584 /* flood-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flood-pin.png"; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		C66E2AC81BDA3FB60011DB1F /* Pins */ = {
 			isa = PBXGroup;
 			children = (
-				E807879C1BDA594D00825584 /* accident-png.png */,
+				E807879C1BDA594D00825584 /* accident-pin.png */,
 				E807879D1BDA594D00825584 /* assault-pin.png */,
 				E807879E1BDA594D00825584 /* drugs-pin.png */,
 				C66E2AC91BDA3FB60011DB1F /* fire-pin.png */,
@@ -606,7 +606,7 @@
 				E80787B51BDA616400825584 /* AppIcon.png in Resources */,
 				E80787A81BDA594D00825584 /* road-pin.png in Resources */,
 				E8A9E6FF1BDA2EF80075C580 /* Timeline@2x.png in Resources */,
-				E80787A41BDA594D00825584 /* accident-png.png in Resources */,
+				E80787A41BDA594D00825584 /* accident-pin.png in Resources */,
 				E8D81A741BD8BDE7008FC2D1 /* Main.storyboard in Resources */,
 				E8A9E6FD1BDA2EE70075C580 /* accident.png in Resources */,
 				E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */,

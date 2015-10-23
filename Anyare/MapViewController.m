@@ -35,6 +35,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self justReloadMap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,12 +62,12 @@
 }
 
 #pragma mark - Public
-//- (void)reloadMap
-//{
-//    [PostController getPostsInLocationWithDelegate:self
-//                                          location:_appDelegate.currentLocationCoordinate
-//                                         authToken:_appDelegate.currentUser.authenticationToken];
-//}
+- (void)justReloadMap
+{
+    [PostController getPostsInLocationWithDelegate:self
+                                          location:_currentPoint
+                                         authToken:_appDelegate.currentUser.authenticationToken];
+}
 
 - (void)reloadMapAt:(CGPoint)point
 {
