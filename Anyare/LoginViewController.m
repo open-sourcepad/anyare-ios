@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "MapViewController.h"
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "UserDM.h"
@@ -75,5 +76,6 @@
     _appDelegate.currentUser = user;
     
     [_appDelegate goToHome];
+    [_appDelegate.mapVC reloadMap];
 }
 @end

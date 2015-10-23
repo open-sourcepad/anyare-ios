@@ -27,6 +27,8 @@
 		E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F51BDA26CF0075C580 /* vandalism.png */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6FA1BDA2BFA0075C580 /* assault.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F81BDA2BFA0075C580 /* assault.png */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6FB1BDA2BFA0075C580 /* pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6F91BDA2BFA0075C580 /* pipe.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6FD1BDA2EE70075C580 /* accident.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6FC1BDA2EE70075C580 /* accident.png */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6FF1BDA2EF80075C580 /* Timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6FE1BDA2EF80075C580 /* Timeline@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E8D81A6B1BD8BDE7008FC2D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6A1BD8BDE7008FC2D1 /* main.m */; };
 		E8D81A6E1BD8BDE7008FC2D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6D1BD8BDE7008FC2D1 /* AppDelegate.m */; };
 		E8D81A711BD8BDE7008FC2D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A701BD8BDE7008FC2D1 /* ViewController.m */; };
@@ -88,6 +90,8 @@
 		E8A9E6F51BDA26CF0075C580 /* vandalism.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vandalism.png; path = Images/Categories/vandalism.png; sourceTree = SOURCE_ROOT; };
 		E8A9E6F81BDA2BFA0075C580 /* assault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = assault.png; path = Images/Categories/assault.png; sourceTree = SOURCE_ROOT; };
 		E8A9E6F91BDA2BFA0075C580 /* pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pipe.png; path = Images/Categories/pipe.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6FC1BDA2EE70075C580 /* accident.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = accident.png; path = Images/Categories/accident.png; sourceTree = SOURCE_ROOT; };
+		E8A9E6FE1BDA2EF80075C580 /* Timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Timeline@2x.png"; path = "Images/Tab/Timeline@2x.png"; sourceTree = SOURCE_ROOT; };
 		E8D81A661BD8BDE7008FC2D1 /* Anyare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anyare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D81A6A1BD8BDE7008FC2D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E8D81A6C1BD8BDE7008FC2D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -178,7 +182,7 @@
 		E84BA4EF1BD8EA3800649F6B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E8A9E6E71BDA13AA0075C580 /* Map */,
+				E8A9E6E71BDA13AA0075C580 /* Tabs */,
 				E8A9E6DD1BDA0ACD0075C580 /* Categories */,
 			);
 			name = Images;
@@ -205,6 +209,7 @@
 		E8A9E6DD1BDA0ACD0075C580 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				E8A9E6FC1BDA2EE70075C580 /* accident.png */,
 				E8A9E6F81BDA2BFA0075C580 /* assault.png */,
 				E8A9E6F91BDA2BFA0075C580 /* pipe.png */,
 				E8A9E6EF1BDA1BB60075C580 /* broken_road.png */,
@@ -217,12 +222,13 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		E8A9E6E71BDA13AA0075C580 /* Map */ = {
+		E8A9E6E71BDA13AA0075C580 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				E8A9E6FE1BDA2EF80075C580 /* Timeline@2x.png */,
 				E8A9E6EA1BDA14390075C580 /* Map@2x.png */,
 			);
-			name = Map;
+			name = Tabs;
 			sourceTree = "<group>";
 		};
 		E8D81A5D1BD8BDE7008FC2D1 = {
@@ -509,7 +515,9 @@
 				E8A9E6EB1BDA14390075C580 /* Map@2x.png in Resources */,
 				E8A9E6FB1BDA2BFA0075C580 /* pipe.png in Resources */,
 				E8A9E6E11BDA0AEC0075C580 /* fire-cat.png in Resources */,
+				E8A9E6FF1BDA2EF80075C580 /* Timeline@2x.png in Resources */,
 				E8D81A741BD8BDE7008FC2D1 /* Main.storyboard in Resources */,
+				E8A9E6FD1BDA2EE70075C580 /* accident.png in Resources */,
 				E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */,
 				E8A9E6F61BDA26CF0075C580 /* drugs.png in Resources */,
 				E8A9E6E31BDA0AEC0075C580 /* theft.png in Resources */,

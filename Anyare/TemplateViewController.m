@@ -14,6 +14,7 @@
 
 @interface TemplateViewController ()
 @property (strong, nonatomic) UIView *categoryPopupView;
+@property (strong, nonatomic) UIButton *closeButton;
 
 @end
 
@@ -55,19 +56,22 @@
     if(!_categoryPopupView) {
         CGFloat originX = _postButton.frame.origin.x+30.0;
         _categoryPopupView = [[UIView alloc] initWithFrame:CGRectMake(originX,
-                                                                      130.0,
+                                                                      110.0,
                                                                       self.view.frame.size.width-originX-60.0,
-                                                                      350.0)];
+                                                                      370.0)];
         _categoryPopupView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _categoryPopupView.backgroundColor = COLOR_THEME;
         _categoryPopupView.layer.borderColor = [UIColor whiteColor].CGColor;
         _categoryPopupView.layer.borderWidth = 3.0;
         _categoryPopupView.layer.cornerRadius = 10.0;
         _categoryPopupView.alpha = 0;
+        _categoryPopupView.center = CGPointMake(self.view.frame.size.width/2, _categoryPopupView.center.y);
+        
+        [_categoryPopupView addSubview:self.closeButton];
         
         // Add category buttons
         CGFloat x = 15.0;
-        CGFloat y = 15.0;
+        CGFloat y = 35.0;
         CGFloat dimension = 75.0;
         CGFloat gap = 15.0;
         UIView *subPopupView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
@@ -96,7 +100,7 @@
                 }
                     break;
                 case kCategoryTraffic: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"traffic.png"] title:@"Traffic"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"accident.png"] title:@"Accident"];
                 }
                     break;
                 case kCategoryRoad: {
@@ -139,6 +143,18 @@
     return _categoryPopupView;
 }
 
+- (UIButton *)closeButton {
+    if(!_closeButton) {
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeButton.frame = CGRectMake(_categoryPopupView.frame.size.width-30.0, 10.0, 20.0, 20.0);
+        [_closeButton setTitle:@"X" forState:UIControlStateNormal];
+        [_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
+        [_closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _closeButton;
+}
+
 #pragma mark - Button Actions
 - (void)postButtonAction:(id)sender
 {
@@ -149,6 +165,11 @@
 }
 
 - (void)categoryButtonAction:(id)sender
+{
+    
+}
+
+- (void)closeButtonAction:(id)sender
 {
     
 }
