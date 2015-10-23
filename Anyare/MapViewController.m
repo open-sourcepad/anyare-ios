@@ -19,6 +19,7 @@
 @property (nonatomic) MGLMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *pins;
 @property (nonatomic) CGPoint currentPoint;
+@property (nonatomic) BOOL firstLoad;
 @end
 
 @implementation MapViewController
@@ -28,7 +29,7 @@
     // Do any additional setup after loading the view.
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+    _firstLoad = YES;
     self.navTitle = @"Map";
 }
 
@@ -142,11 +143,14 @@
 {
     [self.view addSubview:self.mapView];
     
-    
-    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_currentPoint.x, _currentPoint.y);
-    [_mapView setCenterCoordinate:locationCoordinate
-                        zoomLevel:15
-                         animated:NO];
+    if (_firstLoad) {
+        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_currentPoint.x, _currentPoint.y);
+        [_mapView setCenterCoordinate:locationCoordinate
+                            zoomLevel:15
+                             animated:NO];
+        _firstLoad = NO;
+    }
+
     
     NSArray *postsInLocation = [PostDM getPostsFromArray:(NSArray *)resultDict];
     
