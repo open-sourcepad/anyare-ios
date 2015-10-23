@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIImageView *categoryView;
 @property (strong, nonatomic) UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextField *descriptionTextField;
+@property (strong, nonatomic) UIView *photoView;
 @property (strong, nonatomic) UIButton *takePhotoButton;
 @property (strong, nonatomic) UIButton *chooseButton;
 @property (strong, nonatomic) UIButton *postButton;
@@ -42,9 +43,7 @@
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.descriptionLabel];
     [self.view addSubview:self.descriptionTextField];
-    [self.view addSubview:self.imageView];
-    [self.view addSubview:self.takePhotoButton];
-    [self.view addSubview:self.chooseButton];
+    [self.view addSubview:self.photoView];
     [self.view addSubview:self.postButton];
 }
 
@@ -82,22 +81,39 @@
                                                                               SCREEN_WIDTH-20, 45.0)];
                 _descriptionTextField.delegate = self;
         _descriptionTextField.returnKeyType = UIReturnKeyDone;
-        _descriptionTextField.borderStyle = UITextBorderStyleLine;
         _descriptionTextField.placeholder = @"Optional";
+
+        _descriptionTextField.layer.masksToBounds=YES;
+        _descriptionTextField.layer.borderColor = COLOR_THEME.CGColor;
+        _descriptionTextField.layer.borderWidth= 1.0f;
     }
     
     return _descriptionTextField;
 }
 
+- (UIView *)photoView {
+    if (!_photoView) {
+        _photoView = [[UIView alloc] initWithFrame:CGRectMake(10,
+                                                              self.descriptionTextField.frame.origin.y + self.descriptionTextField.frame.size.height + 20,
+                                                               SCREEN_WIDTH-20,
+                                                              100)];
+        [_photoView addSubview:self.takePhotoButton];
+        [_photoView addSubview:self.chooseButton];
+        [_photoView addSubview:self.imageView];
+    }
+    
+    return _photoView;
+}
+
 - (UIImageView *)imageView {
     if(!_imageView) {
-        CGFloat dimension = 100.0;
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2) - (dimension/2),
-                                                                       ( self.descriptionTextField.frame.origin.y + self.descriptionTextField.frame.size.height + 20 ),
-                                                                       dimension, dimension)];
-        _imageView.backgroundColor = [UIColor grayColor];
-        _imageView.layer.cornerRadius = _imageView.frame.size.width/2;
-        _imageView.clipsToBounds = YES;
+        CGFloat width = (SCREEN_WIDTH/2)-10;
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(width,
+                                                                       0,
+                                                                       width, 100.0)];
+//        _imageView.backgroundColor = [UIColor grayColor];
+//        _imageView.layer.cornerRadius = _imageView.frame.size.width/2;
+//        _imageView.clipsToBounds = YES;
     }
     return _imageView;
 }
@@ -105,8 +121,8 @@
 - (UIButton *)takePhotoButton {
     if(!_takePhotoButton) {
         _takePhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _takePhotoButton.frame = CGRectMake(self.descriptionTextField.frame.origin.x,
-                                       (self.imageView.frame.origin.y + self.imageView.frame.size.height + 20 ),
+        _takePhotoButton.frame = CGRectMake(0,
+                                       0,
                                        (self.descriptionTextField.frame.size.width/2)-1,
                                        self.descriptionTextField.frame.size.height);
         
@@ -122,8 +138,8 @@
 - (UIButton *)chooseButton {
     if(!_chooseButton) {
         _chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _chooseButton.frame = CGRectMake(self.takePhotoButton.frame.origin.x + self.takePhotoButton.frame.size.width + 1,
-                                       (self.imageView.frame.origin.y + self.imageView.frame.size.height + 20 ),
+        _chooseButton.frame = CGRectMake(0,
+                                       (self.takePhotoButton.frame.origin.y + self.takePhotoButton.frame.size.height + 10 ),
                                        self.takePhotoButton.frame.size.width,
                                        self.takePhotoButton.frame.size.height);
         
@@ -139,8 +155,8 @@
 - (UIButton *)postButton {
     if(!_postButton) {
         _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postButton.frame = CGRectMake(self.takePhotoButton.frame.origin.x,
-                                        (self.takePhotoButton.frame.origin.y + self.takePhotoButton.frame.size.height + 20 ),
+        _postButton.frame = CGRectMake(self.photoView.frame.origin.x,
+                                        (self.photoView.frame.origin.y + self.photoView.frame.size.height + 20 ),
                                         self.descriptionTextField.frame.size.width,
                                         self.descriptionTextField.frame.size.height);
 

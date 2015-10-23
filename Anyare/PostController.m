@@ -54,7 +54,7 @@ static PostController *singleton = nil;
         // Construct filename from user id and date/time + index
         NSString *filename = [NSString stringWithFormat:@"photo.png"];
         
-        UIImage *image = post.image;
+        UIImage *image = [self compressForUpload:post.image scale:0.1];
         NSMutableURLRequest *request = [objMgr.HTTPClient multipartFormRequestWithMethod:@"POST"
                                                                                     path:API_CREATE_POST
                                                                               parameters:params
@@ -125,5 +125,26 @@ static PostController *singleton = nil;
                             NSLog(@"Error: %@", error.localizedDescription);
                         }];
 
+}
+
+- (UIImage *)compressForUpload:(UIImage *)original scale:(CGFloat)scale
+{
+    NSData *imgData = UIImageJPEGRepresentation(original, 1); //1 it represents the quality of the image.
+    NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imgData length]);
+
+    // Calculate new size given scale factor.
+    CGSize originalSize = original.size;
+    CGSize newSize = CGSizeMake(originalSize.width * scale, originalSize.height * scale);
+    
+    // Scale the original image to match the new size.
+    UIGraphicsBeginImageContext(newSize);
+    [original drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage* compressedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    NSData *compressedImageData = UIImageJPEGRepresentation(compressedImage, 1); //1 it represents the quality of the image.
+    NSLog(@"Size of Image(bytes):%lu",(unsigned long)[compressedImageData length]);
+
+    return compressedImage;
 }
 @end
