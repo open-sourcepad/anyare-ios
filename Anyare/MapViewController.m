@@ -71,10 +71,25 @@
     point.coordinate = locationCoordinate;
     point.title = @"Hello world!";
     point.subtitle = @"Welcome to The Ellipse.";
+
     [_mapView addAnnotation:point];
     
     [self.view bringSubviewToFront:_mapView];
     [self.view bringSubviewToFront:self.postButton];
+}
+
+- (MGLAnnotationImage *)mapView:(MGLMapView *)mapView imageForAnnotation:(id <MGLAnnotation>)annotation
+{
+    MGLAnnotationImage *annotationImage = [mapView dequeueReusableAnnotationImageWithIdentifier:@"pisa"];
+    
+    if ( ! annotationImage)
+    {
+        // Leaning Tower of Pisa by Stefan Spieler from the Noun Project
+        UIImage *image = [UIImage imageNamed:@"fire-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:@"pisa"];
+    }
+    
+    return annotationImage;
 }
 
 
