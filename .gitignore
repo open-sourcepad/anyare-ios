@@ -1,2 +1,5 @@
 *.DS_Store
 Anyare.xcworkspace
+Anyare.xcodeproj/xcuserdata
+Anyare.xcodeproj/project.xcworkspace
+
