@@ -7,6 +7,7 @@
 //
 
 #import "PostViewController.h"
+#import "MapViewController.h"
 #import "Constants.h"
 #import "PostController.h"
 #import "PostDM.h"
@@ -229,6 +230,10 @@
     }else{
         NSLog(@"NOPE");
     }
+    
+    // Force map reload after posting
+    [_appDelegate.mapVC reloadMapAt:_appDelegate.currentLocationCoordinate];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
