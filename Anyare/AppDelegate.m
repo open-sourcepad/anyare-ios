@@ -57,7 +57,11 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if([userDefaults boolForKey:DEFAULT_USER_LOGGED_IN]) {
+    
+    if([userDefaults objectForKey:DEFAULT_USER_LOGGED_IN]) {
+        _currentUser = [UserDM loadCustomObjectWithKey:DEFAULT_USER_LOGGED_IN];
+        NSLog(@"Auth token: %@", _currentUser.authenticationToken);
+        
         [self goToHome];
     }
     else {

@@ -9,8 +9,10 @@
 #import "MapViewController.h"
 #import "AppDelegate.h"
 #import "Mapbox.h"
+#import "PostController.h"
+#import "UserDM.h"
 
-@interface MapViewController () <MGLMapViewDelegate>
+@interface MapViewController () <MGLMapViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) MGLMapView *mapView;
 @property (nonatomic) BOOL hasLoadedMap;
@@ -57,14 +59,18 @@
 #pragma mark - Public
 - (void)reloadMap
 {
+//    [PostController getPostsInLocationWithDelegate:self
+//                                          location:_appDelegate.currentLocationCoordinate
+//                                         authToken:_appDelegate.currentUser.authenticationToken];
+    
     _hasLoadedMap = YES;
     [self.view addSubview:self.mapView];
-
+    
     NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
     CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
     [_mapView setCenterCoordinate:locationCoordinate
-                            zoomLevel:15
-                             animated:YES];
+                        zoomLevel:15
+                         animated:YES];
     
     // Declare the annotation `point` and set its coordinates, title, and subtitle
     MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
@@ -92,5 +98,29 @@
     return annotationImage;
 }
 
+#pragma mark - Post Controller delegate
+- (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
+{
+//    // Load all markers
+//    
+//    _hasLoadedMap = YES;
+//    [self.view addSubview:self.mapView];
+//    
+//    NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
+//    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
+//    [_mapView setCenterCoordinate:locationCoordinate
+//                        zoomLevel:15
+//                         animated:YES];
+//    
+//    // Declare the annotation `point` and set its coordinates, title, and subtitle
+//    MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
+//    point.coordinate = locationCoordinate;
+//    point.title = @"Hello world!";
+//    point.subtitle = @"Welcome to The Ellipse.";
+//    [_mapView addAnnotation:point];
+//    
+//    [self.view bringSubviewToFront:_mapView];
+//    [self.view bringSubviewToFront:self.postButton];
+}
 
 @end

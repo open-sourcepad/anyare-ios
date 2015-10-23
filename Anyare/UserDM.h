@@ -13,4 +13,8 @@
 @property (strong, nonatomic) NSString *deviceToken;
 @property (strong, nonatomic) NSString *authenticationToken;
 @property (strong, nonatomic) NSString *email;
+
++ (void)saveCustomObject:(UserDM *)user key:(NSString *)key;
++ (UserDM *)loadCustomObjectWithKey:(NSString *)key;
+
 @end

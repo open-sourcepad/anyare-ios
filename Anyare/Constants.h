@@ -15,8 +15,10 @@
 
 #define API_SIGN_IN                                 @"/api/sign_in"
 #define API_CREATE_POST                             @"/api/posts"
+#define API_GET_POSTS_IN_LOCATION                   @"/api/posts"
 
 #define KEY_SUCCESS                                 @"success"
+
 
 // COLORS
 #define RGB(r,g,b)                                  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
@@ -28,6 +30,8 @@
 
 // DEFAULTS
 #define DEFAULT_USER_LOGGED_IN                      @"user is logged in"
+#define DEFAULT_USER_AUTH_TOKEN                     @"user auth token"
+#define DEFAULT_USER_ID                             @"user id"
 
 // FONT
 #define FONT_SIZE_NORMAL                            13

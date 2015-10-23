@@ -59,4 +59,35 @@ static PostController *singleton = nil;
                        }];
 
 }
+
++ (void)getPostsInLocationWithDelegate:(id <PostControllerDelegate>)delegate
+                              location:(CGPoint)locationCoordinate
+                             authToken:(NSString *)authenticationToken
+{
+    RKObjectManager *objMgr = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).apiObjMgr;
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSNumber numberWithFloat:locationCoordinate.x] forKey:@"latitude"];
+    [params setObject:[NSNumber numberWithFloat:locationCoordinate.y] forKey:@"longitude"];
+    [params setObject:authenticationToken forKey:@"auth_token"];
+    
+    [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
+    [objMgr.HTTPClient postPath:API_GET_POSTS_IN_LOCATION
+                     parameters:params
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSError *error;
+                            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
+                            NSLog(@"Response: %@", responseDict);
+                            BOOL isSuccess = [[responseDict objectForKey:@"success"] boolValue];
+                            
+                            if(isSuccess) {
+                                NSDictionary *resultDict = [responseDict objectForKey:@"data"];
+                                if ([delegate respondsToSelector:@selector(getPostsDidFinish:resultDict:)])
+                                    [delegate performSelector:@selector(getPostsDidFinish:resultDict:) withObject:self withObject:resultDict];
+                            }
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"Error: %@", error.localizedDescription);
+                        }];
+
+}
 @end

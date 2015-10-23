@@ -51,9 +51,6 @@
 #pragma mark - FB Login Delegate
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:DEFAULT_USER_LOGGED_IN];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     // Login user
     UserDM *user = [[UserDM alloc] init];
     user.deviceToken = _appDelegate.deviceToken;
@@ -73,6 +70,8 @@
     user.email = [resultDict objectForKey:@"email"];
     user.authenticationToken = [resultDict objectForKey:@"auth_token"];
     _appDelegate.currentUser = user;
+    
+    [UserDM saveCustomObject:_appDelegate.currentUser key:DEFAULT_USER_LOGGED_IN];
     
     [_appDelegate goToHome];
     [_appDelegate.mapVC reloadMap];
