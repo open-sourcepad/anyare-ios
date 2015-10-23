@@ -833,7 +833,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sourcepad.anyare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2da83f74-b91c-49a2-b80f-90ede4d444c1";
+				PROVISIONING_PROFILE = "53f6ff22-ec1d-4724-a57b-5ce919370245";
 			};
 			name = Debug;
 		};
@@ -849,7 +849,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sourcepad.anyare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2da83f74-b91c-49a2-b80f-90ede4d444c1";
+				PROVISIONING_PROFILE = "53f6ff22-ec1d-4724-a57b-5ce919370245";
 			};
 			name = Release;
 		};

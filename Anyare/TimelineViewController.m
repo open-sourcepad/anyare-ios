@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UserDM.h"
 #import "PostDM.h"
+#import "Constants.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) UITableView *mainTableView;
@@ -77,7 +78,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0;
+    // Check if post has details
+    PostDM *post = [_posts objectAtIndex:indexPath.row];
+    if(post.detailed)
+        return TIMELINE_WITH_IMAGE_TEXT_CELL_ROW_HEIGHT;
+    else if(post.details.length)
+        return TIMELINE_WITH_TEXT_CELL_ROW_HEIGHT;
+    else
+        return TIMELINE_CELL_ROW_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

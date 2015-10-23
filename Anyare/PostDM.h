@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSString *dateTime;
 @property (nonatomic) BOOL resolved;
+@property (nonatomic) BOOL detailed;                // Yes if post has image
 
 @property (strong, nonatomic) NSString *smallImageUrl;
 @property (strong, nonatomic) NSString *mediumImageUrl;
