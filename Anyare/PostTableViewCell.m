@@ -42,8 +42,8 @@
 - (UIImageView *)iconImageView {
     if(!_iconImageView) {
         _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kPostCellPadding, kPostCellPadding, kPostCellIconDimension, kPostCellIconDimension)];
-        _iconImageView.backgroundColor = [UIColor darkGrayColor];
-        _iconImageView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        _iconImageView.backgroundColor = [UIColor whiteColor];
+        _iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         _iconImageView.layer.borderWidth = 2.0;
         _iconImageView.layer.cornerRadius = 8.0;
     }
@@ -80,6 +80,32 @@
 
 - (void)createCellWithPost:(PostDM *)post
 {
+    NSString *category = post.category;
+    UIImage *image;
     
+    if ([category isEqualToString:CATEGORY_FIRE])
+        image = [UIImage imageNamed:@"fire-pin"];
+    else if ([category isEqualToString:CATEGORY_FLOOD])
+        image = [UIImage imageNamed:@"flood-pin"];
+    else if ([category isEqualToString:CATEGORY_THEFT])
+        image = [UIImage imageNamed:@"theft-pin"];
+    else if ([category isEqualToString:CATEGORY_ACCIDENT])
+        image = [UIImage imageNamed:@"accident-pin"];
+    else if ([category isEqualToString:CATEGORY_ROAD])
+        image = [UIImage imageNamed:@"road-pin"];
+    else if ([category isEqualToString:CATEGORY_WATERWORKS])
+        image = [UIImage imageNamed:@"waterworks-pin"];
+    else if ([category isEqualToString:CATEGORY_ASSAULT])
+        image = [UIImage imageNamed:@"assault-pin"];
+    else if ([category isEqualToString:CATEGORY_VANDALISM])
+        image = [UIImage imageNamed:@"vandalism-pin"];
+    else if ([category isEqualToString:CATEGORY_DRUGS])
+        image = [UIImage imageNamed:@"drugs-pin"];
+    
+    _iconImageView.image = image;
+
+    _locationLabel.text = post.address;
+    NSLog(@"date: %@", post.dateTime);
+
 }
 @end

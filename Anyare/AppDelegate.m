@@ -229,7 +229,7 @@
         NSLog(@"Current location: (%f, %f)", location.coordinate.latitude, location.coordinate.longitude);
         
         _isLocationDetected = YES;
-        [_mapVC reloadMap];
+        [_mapVC reloadMapAt:_currentLocationCoordinate];
     }
 }
 

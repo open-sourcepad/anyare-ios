@@ -74,6 +74,6 @@
     [UserDM saveCustomObject:_appDelegate.currentUser key:DEFAULT_USER_LOGGED_IN];
     
     [_appDelegate goToHome];
-    [_appDelegate.mapVC reloadMap];
+    [_appDelegate.mapVC reloadMapAt:_appDelegate.currentLocationCoordinate];
 }
 @end
