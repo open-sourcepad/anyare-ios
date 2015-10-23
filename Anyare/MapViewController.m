@@ -10,12 +10,14 @@
 #import "AppDelegate.h"
 #import "Mapbox.h"
 #import "PostController.h"
+#import "Constants.h"
 #import "UserDM.h"
+#import "PostDM.h"
 
 @interface MapViewController () <MGLMapViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) MGLMapView *mapView;
-@property (nonatomic) BOOL hasLoadedMap;
+@property (strong, nonatomic) NSMutableArray *pins;
 @end
 
 @implementation MapViewController
@@ -59,68 +61,99 @@
 #pragma mark - Public
 - (void)reloadMap
 {
-//    [PostController getPostsInLocationWithDelegate:self
-//                                          location:_appDelegate.currentLocationCoordinate
-//                                         authToken:_appDelegate.currentUser.authenticationToken];
+    [PostController getPostsInLocationWithDelegate:self
+                                          location:_appDelegate.currentLocationCoordinate
+                                         authToken:_appDelegate.currentUser.authenticationToken];
+}
+
+- (void)reloadMapAt:(CGPoint)point
+{
+    [PostController getPostsInLocationWithDelegate:self
+                                          location:point
+                                         authToken:_appDelegate.currentUser.authenticationToken];
+}
+
+- (MGLAnnotationImage *)mapView:(MGLMapView *)mapView imageForAnnotation:(id <MGLAnnotation>)annotation
+{
+    NSString *category = annotation.subtitle;
+    MGLAnnotationImage *annotationImage;
+    UIImage *image;
     
-    _hasLoadedMap = YES;
+    if ([category isEqualToString:CATEGORY_FIRE]) {
+        image = [UIImage imageNamed:@"fire-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_FIRE];
+    }
+    else if ([category isEqualToString:CATEGORY_FLOOD]) {
+        image = [UIImage imageNamed:@"flood-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_FLOOD];
+    }
+    else if ([category isEqualToString:CATEGORY_THEFT]) {
+        image = [UIImage imageNamed:@"theft-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_THEFT];
+    }
+    else if ([category isEqualToString:CATEGORY_ACCIDENT]) {
+        image = [UIImage imageNamed:@"accident-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_ACCIDENT];
+    }
+    else if ([category isEqualToString:CATEGORY_ROAD]) {
+        image = [UIImage imageNamed:@"road-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_ROAD];
+    }
+    else if ([category isEqualToString:CATEGORY_WATERWORKS]) {
+        image = [UIImage imageNamed:@"waterworks-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_WATERWORKS];
+    }
+    else if ([category isEqualToString:CATEGORY_ASSAULT]) {
+        image = [UIImage imageNamed:@"assault-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_ASSAULT];
+    }
+    else if ([category isEqualToString:CATEGORY_VANDALISM]) {
+        image = [UIImage imageNamed:@"vandalism-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_VANDALISM];
+    }
+    else if ([category isEqualToString:CATEGORY_DRUGS]) {
+        image = [UIImage imageNamed:@"drugs-pin"];
+        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:CATEGORY_DRUGS];
+    }
+    
+    return annotationImage;
+}
+
+- (void)mapView:(MGLMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    // Remove all annotations
+    //[mapView removeAnnotations:mapView.annotations];
+    
+    NSLog(@"Region did change (%f,%f)", mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
+    //[self reloadMapAt:CGPointMake(mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude)];
+}
+
+
+#pragma mark - Post Controller delegate
+- (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
+{
     [self.view addSubview:self.mapView];
     
     NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
     CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
     [_mapView setCenterCoordinate:locationCoordinate
                         zoomLevel:15
-                         animated:YES];
+                         animated:NO];
     
-    // Declare the annotation `point` and set its coordinates, title, and subtitle
-    MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
-    point.coordinate = locationCoordinate;
-    point.title = @"Hello world!";
-    point.subtitle = @"Welcome to The Ellipse.";
-
-    [_mapView addAnnotation:point];
+    NSArray *postsInLocation = [PostDM getPostsFromArray:(NSArray *)resultDict];
+    
+    // Load all markers
+    for (PostDM *post in postsInLocation) {
+        MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
+        point.coordinate = CLLocationCoordinate2DMake(post.latitude, post.longitude);
+        point.title = post.address;
+        point.subtitle = post.category;
+        [_mapView addAnnotation:point];
+        break;
+    }
     
     [self.view bringSubviewToFront:_mapView];
     [self.view bringSubviewToFront:self.postButton];
-}
-
-- (MGLAnnotationImage *)mapView:(MGLMapView *)mapView imageForAnnotation:(id <MGLAnnotation>)annotation
-{
-    MGLAnnotationImage *annotationImage = [mapView dequeueReusableAnnotationImageWithIdentifier:@"pisa"];
-    
-    if ( ! annotationImage)
-    {
-        // Leaning Tower of Pisa by Stefan Spieler from the Noun Project
-        UIImage *image = [UIImage imageNamed:@"fire-pin"];
-        annotationImage = [MGLAnnotationImage annotationImageWithImage:image reuseIdentifier:@"pisa"];
-    }
-    
-    return annotationImage;
-}
-
-#pragma mark - Post Controller delegate
-- (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
-{
-//    // Load all markers
-//    
-//    _hasLoadedMap = YES;
-//    [self.view addSubview:self.mapView];
-//    
-//    NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
-//    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
-//    [_mapView setCenterCoordinate:locationCoordinate
-//                        zoomLevel:15
-//                         animated:YES];
-//    
-//    // Declare the annotation `point` and set its coordinates, title, and subtitle
-//    MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
-//    point.coordinate = locationCoordinate;
-//    point.title = @"Hello world!";
-//    point.subtitle = @"Welcome to The Ellipse.";
-//    [_mapView addAnnotation:point];
-//    
-//    [self.view bringSubviewToFront:_mapView];
-//    [self.view bringSubviewToFront:self.postButton];
 }
 
 @end

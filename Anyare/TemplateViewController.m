@@ -49,6 +49,7 @@
         _postButton.layer.cornerRadius = BTN_POST_DIMENSION/2;
         _postButton.layer.borderColor = COLOR_THEME.CGColor;
         _postButton.layer.borderWidth = 5.0;
+        _postButton.contentMode = UIViewContentModeScaleAspectFit;
         [_postButton setImage:[UIImage imageNamed:@"send.png"] forState:UIControlStateNormal];
     }
     return _postButton;
@@ -101,7 +102,7 @@
                     [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Theft"];
                 }
                     break;
-                case kCategoryTraffic: {
+                case kCategoryAccident: {
                     [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"accident.png"] title:@"Accident"];
                 }
                     break;

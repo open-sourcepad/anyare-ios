@@ -11,8 +11,17 @@
 @interface PostDM : NSObject
 @property (nonatomic) int postId;
 @property (strong, nonatomic) NSString *category;
+@property (strong, nonatomic) NSString *address;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
-@property (strong, nonatomic) NSString *details;
+@property (strong, nonatomic) NSString *details;    // Description
 @property (strong, nonatomic) NSDate *dateTime;
+@property (nonatomic) BOOL resolved;
+
+@property (strong, nonatomic) NSString *smallImageUrl;
+@property (strong, nonatomic) NSString *mediumImageUrl;
+@property (strong, nonatomic) NSString *largeImageUrl;
+
++ (NSArray *)getPostsFromArray:(NSArray *)array;
++ (PostDM *)getPostFromDictionary:(NSDictionary *)dict;
 @end
