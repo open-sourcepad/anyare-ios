@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface Utility : NSObject
-
++ (NSDate *)convertUnixToDate:(long)unix;
 @end

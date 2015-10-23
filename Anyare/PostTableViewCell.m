@@ -9,6 +9,7 @@
 #import "PostTableViewCell.h"
 #import "Constants.h"
 #import "PostDM.h"
+#import "Utility.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -103,9 +104,13 @@
         image = [UIImage imageNamed:@"drugs-pin"];
     
     _iconImageView.image = image;
-
     _locationLabel.text = post.address;
-    NSLog(@"date: %@", post.dateTime);
+    
+    // Date and time
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"MMMM d, yyyy hh:mm aa"];
+    NSDate *dateTime = [df dateFromString:post.dateTime];
+    _dateTimeLabel.text = [df stringFromDate:dateTime];
 
 }
 @end

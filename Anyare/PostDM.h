@@ -17,7 +17,7 @@
 @property (nonatomic) float longitude;
 @property (strong, nonatomic) NSString *details;    // Description
 @property (strong, nonatomic) UIImage *image;
-@property (nonatomic) long dateTime;
+@property (strong, nonatomic) NSString *dateTime;
 @property (nonatomic) BOOL resolved;
 
 @property (strong, nonatomic) NSString *smallImageUrl;

@@ -36,7 +36,8 @@
     post.latitude = [[dict objectForKey:@"latitude"] floatValue];
     post.longitude = [[dict objectForKey:@"longitude"] floatValue];
     
-    post.dateTime = [[dict objectForKey:@"update_at"] longValue];
+    //post.dateTime = [[dict objectForKey:@"update_at"] longValue];
+    post.dateTime = [dict objectForKey:@"updated_at"];
     
     // Save user
     

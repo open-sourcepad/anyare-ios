@@ -10,4 +10,9 @@
 
 @implementation Utility
 
++ (NSDate *)convertUnixToDate:(long)unix
+{
+    return [NSDate dateWithTimeIntervalSince1970:unix];;
+}
+
 @end
