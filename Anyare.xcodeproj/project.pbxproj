@@ -12,6 +12,7 @@
 		C66E2AC11BDA21880011DB1F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C66E2ABE1BDA21880011DB1F /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		C66E2AC71BDA37810011DB1F /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C66E2AC61BDA37810011DB1F /* Helpers.m */; settings = {ASSET_TAGS = (); }; };
 		C66E2ACA1BDA3FB60011DB1F /* fire-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = C66E2AC91BDA3FB60011DB1F /* fire-pin.png */; settings = {ASSET_TAGS = (); }; };
+		C66E2AD01BDA5E260011DB1F /* DuplicateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66E2ACF1BDA5E260011DB1F /* DuplicateViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DAAD8D61B3C78EC9759247C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DD9803F0E5641F57BF4D4C2 /* libPods.a */; };
 		E807879A1BDA465700825584 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = E80787991BDA465700825584 /* send.png */; settings = {ASSET_TAGS = (); }; };
 		E84BA4D91BD8D33A00649F6B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84BA4D81BD8D33A00649F6B /* CoreLocation.framework */; };
@@ -76,6 +77,8 @@
 		C66E2AC51BDA37810011DB1F /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		C66E2AC61BDA37810011DB1F /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		C66E2AC91BDA3FB60011DB1F /* fire-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire-pin.png"; sourceTree = "<group>"; };
+		C66E2ACE1BDA5E260011DB1F /* DuplicateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuplicateViewController.h; sourceTree = "<group>"; };
+		C66E2ACF1BDA5E260011DB1F /* DuplicateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuplicateViewController.m; sourceTree = "<group>"; };
 		D9ABC2F1A73EC05C40840BBD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E80787991BDA465700825584 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send.png; path = Images/send.png; sourceTree = SOURCE_ROOT; };
 		E84BA4D81BD8D33A00649F6B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -415,6 +418,8 @@
 			children = (
 				E8D81AAD1BD8C90A008FC2D1 /* PostViewController.h */,
 				E8D81AAE1BD8C90A008FC2D1 /* PostViewController.m */,
+				C66E2ACE1BDA5E260011DB1F /* DuplicateViewController.h */,
+				C66E2ACF1BDA5E260011DB1F /* DuplicateViewController.m */,
 			);
 			name = Post;
 			sourceTree = "<group>";
@@ -627,6 +632,7 @@
 				E8A9E6E61BDA0F5E0075C580 /* CategoryButton.m in Sources */,
 				C66E2AC71BDA37810011DB1F /* Helpers.m in Sources */,
 				E8D81A6E1BD8BDE7008FC2D1 /* AppDelegate.m in Sources */,
+				C66E2AD01BDA5E260011DB1F /* DuplicateViewController.m in Sources */,
 				E8D81A6B1BD8BDE7008FC2D1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

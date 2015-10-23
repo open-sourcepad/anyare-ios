@@ -9,6 +9,7 @@
 #import "PostViewController.h"
 #import "Constants.h"
 #import "PostController.h"
+#import "DuplicateViewController.h"
 #import "PostDM.h"
 #import "AppDelegate.h"
 #import "UserDM.h"
@@ -139,12 +140,19 @@
 
 - (void)postButtonAction:(id)sender
 {
-    NSLog(@"TOKEN : %@", _appDelegate.currentUser.authenticationToken);
     _post.category = [self categoryName:self.category];
     _post.latitude = _appDelegate.currentLocationCoordinate.x;
     _post.longitude = _appDelegate.currentLocationCoordinate.y;
     _post.details   = self.descriptionTextField.text;
-    [PostController createPostWithDelegate:self post:_post userToken:@"zgGZwkG72YjJYoTv4xQK"];
+    [PostController createPostWithDelegate:self post:_post userToken:_appDelegate.currentUser.authenticationToken];
+}
+
+- (void)gotoDuplicateCtrl: (NSMutableArray *)posts
+{
+    DuplicateViewController *ctrl = [[DuplicateViewController alloc] init];
+    ctrl.posts = posts;
+    [self.navigationController pushViewController:ctrl animated:YES];
+    ctrl = nil;
 }
 
 - (void)takePhoto:(UIButton *)sender {
@@ -225,11 +233,13 @@
     BOOL isNewPost = [[resultDict objectForKey:@"new_post"] boolValue];
     
     if (isNewPost) {
-        NSLog(@"NEW");
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
-        NSLog(@"NOPE");
+        NSDictionary *data = [resultDict objectForKey:@"data"];
+        NSArray *arr = [PostDM getPostsFromArray:(NSArray *)data];
+        NSMutableArray *posts = [arr mutableCopy];
+        [self gotoDuplicateCtrl:posts];
     }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
