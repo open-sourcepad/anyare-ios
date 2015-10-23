@@ -21,6 +21,7 @@
 		E8A9E6E61BDA0F5E0075C580 /* CategoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A9E6E51BDA0F5E0075C580 /* CategoryButton.m */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6EB1BDA14390075C580 /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6EA1BDA14390075C580 /* Map@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E8A9E6EE1BDA14B50075C580 /* PostController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A9E6ED1BDA14B50075C580 /* PostController.m */; settings = {ASSET_TAGS = (); }; };
+		E8A9E6F01BDA1BB60075C580 /* broken_road.png in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E6EF1BDA1BB60075C580 /* broken_road.png */; settings = {ASSET_TAGS = (); }; };
 		E8D81A6B1BD8BDE7008FC2D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6A1BD8BDE7008FC2D1 /* main.m */; };
 		E8D81A6E1BD8BDE7008FC2D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A6D1BD8BDE7008FC2D1 /* AppDelegate.m */; };
 		E8D81A711BD8BDE7008FC2D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D81A701BD8BDE7008FC2D1 /* ViewController.m */; };
@@ -75,6 +76,7 @@
 		E8A9E6EA1BDA14390075C580 /* Map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Map@2x.png"; path = "Images/Tab/Map@2x.png"; sourceTree = SOURCE_ROOT; };
 		E8A9E6EC1BDA14B50075C580 /* PostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostController.h; sourceTree = "<group>"; };
 		E8A9E6ED1BDA14B50075C580 /* PostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostController.m; sourceTree = "<group>"; };
+		E8A9E6EF1BDA1BB60075C580 /* broken_road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = broken_road.png; path = Images/Categories/broken_road.png; sourceTree = SOURCE_ROOT; };
 		E8D81A661BD8BDE7008FC2D1 /* Anyare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anyare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D81A6A1BD8BDE7008FC2D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E8D81A6C1BD8BDE7008FC2D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		E8A9E6DD1BDA0ACD0075C580 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				E8A9E6EF1BDA1BB60075C580 /* broken_road.png */,
 				E8A9E6DE1BDA0AEC0075C580 /* fire-cat.png */,
 				E8A9E6DF1BDA0AEC0075C580 /* flood.png */,
 				E8A9E6E01BDA0AEC0075C580 /* theft.png */,
@@ -482,6 +485,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A9E6F01BDA1BB60075C580 /* broken_road.png in Resources */,
 				E8D81A791BD8BDE7008FC2D1 /* LaunchScreen.storyboard in Resources */,
 				E8A9E6E21BDA0AEC0075C580 /* flood.png in Resources */,
 				E8D81A761BD8BDE7008FC2D1 /* Assets.xcassets in Resources */,

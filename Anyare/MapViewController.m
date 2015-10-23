@@ -71,6 +71,7 @@
     point.subtitle = @"Welcome to The Ellipse.";
     [_mapView addAnnotation:point];
     
+    [self.view bringSubviewToFront:_mapView];
     [self.view bringSubviewToFront:self.postButton];
 }
 

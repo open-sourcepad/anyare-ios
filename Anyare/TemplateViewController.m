@@ -100,7 +100,7 @@
                 }
                     break;
                 case kCategoryRoad: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Road"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"broken_road.png"] title:@"Road"];
                 }
                     break;
                 case kCategoryWaterworks: {
@@ -108,7 +108,7 @@
                 }
                     break;
                 case kCategoryAssault: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Theft"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Assault"];
                 }
                     break;
                 case kCategoryVandalism: {

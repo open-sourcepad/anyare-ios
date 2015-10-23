@@ -39,40 +39,40 @@ static PostController *singleton = nil;
 #pragma mark - Request Methods
 - (void)createPost:(PostDM *)post userToken:(NSString *)userToken
 {
-    RKObjectManager *objMgr = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).apiObjMgr;
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:userToken forKey:@"device_id"];
-    
-    [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
-    [objMgr.HTTPClient postPath:@""
-                    parameters:params
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           NSError *error;
-                           NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
-                           NSLog(@"Response: %@", responseDict);
-                           BOOL isSuccess = [[responseDict objectForKey:KEY_SUCCESS] boolValue];
-                           
-                           if(isSuccess) {
-                               NSDictionary *resultDict = [responseDict objectForKey:KEY_DATA];
-                               if ([delegate respondsToSelector:@selector(getChannelDidFinish:resultDict:)])
-                                   [delegate performSelector:@selector(getChannelDidFinish:resultDict:) withObject:self withObject:resultDict];
-                           }
-                           else {
-                               if ([delegate respondsToSelector:@selector(getChannel:didFailWithResultDict:)]) {
-                                   [delegate performSelector:@selector(getChannel:didFailWithResultDict:)
-                                                  withObject:self
-                                                  withObject:[NSDictionary dictionaryWithObject:[responseDict objectForKey:KEY_ERROR_MESSAGE] forKey:KEY_ERRORS]];
-                               }
-                           }
-                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                           NSLog(@"Error: %@", error.localizedDescription);
-                           if ([delegate respondsToSelector:@selector(getChannel:didFailWithResultDict:)]) {
-                               [delegate performSelector:@selector(getChannel:didFailWithResultDict:)
-                                              withObject:self
-                                              withObject:[NSDictionary dictionaryWithObject:error.userInfo forKey:KEY_ERRORS]];
-                           }
-                       }];
+//    RKObjectManager *objMgr = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).apiObjMgr;
+//    
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    [params setObject:userToken forKey:@"device_id"];
+//    
+//    [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
+//    [objMgr.HTTPClient postPath:@""
+//                    parameters:params
+//                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                           NSError *error;
+//                           NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
+//                           NSLog(@"Response: %@", responseDict);
+//                           BOOL isSuccess = [[responseDict objectForKey:KEY_SUCCESS] boolValue];
+//                           
+//                           if(isSuccess) {
+//                               NSDictionary *resultDict = [responseDict objectForKey:KEY_DATA];
+//                               if ([delegate respondsToSelector:@selector(getChannelDidFinish:resultDict:)])
+//                                   [delegate performSelector:@selector(getChannelDidFinish:resultDict:) withObject:self withObject:resultDict];
+//                           }
+//                           else {
+//                               if ([delegate respondsToSelector:@selector(getChannel:didFailWithResultDict:)]) {
+//                                   [delegate performSelector:@selector(getChannel:didFailWithResultDict:)
+//                                                  withObject:self
+//                                                  withObject:[NSDictionary dictionaryWithObject:[responseDict objectForKey:KEY_ERROR_MESSAGE] forKey:KEY_ERRORS]];
+//                               }
+//                           }
+//                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                           NSLog(@"Error: %@", error.localizedDescription);
+//                           if ([delegate respondsToSelector:@selector(getChannel:didFailWithResultDict:)]) {
+//                               [delegate performSelector:@selector(getChannel:didFailWithResultDict:)
+//                                              withObject:self
+//                                              withObject:[NSDictionary dictionaryWithObject:error.userInfo forKey:KEY_ERRORS]];
+//                           }
+//                       }];
 
 }
 @end
