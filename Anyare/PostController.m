@@ -72,7 +72,7 @@ static PostController *singleton = nil;
     [params setObject:authenticationToken forKey:@"auth_token"];
     
     [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
-    [objMgr.HTTPClient postPath:API_GET_POSTS_IN_LOCATION
+    [objMgr.HTTPClient getPath:API_GET_POSTS_IN_LOCATION
                      parameters:params
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             NSError *error;

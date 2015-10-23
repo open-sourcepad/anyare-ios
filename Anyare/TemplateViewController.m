@@ -49,6 +49,7 @@
         _postButton.layer.cornerRadius = BTN_POST_DIMENSION/2;
         _postButton.layer.borderColor = COLOR_THEME.CGColor;
         _postButton.layer.borderWidth = 5.0;
+        [_postButton setImage:[UIImage imageNamed:@"send.png"] forState:UIControlStateNormal];
     }
     return _postButton;
 }
@@ -167,7 +168,6 @@
 
 - (void)categoryButtonAction:(CategoryButton *)sender
 {
-    
     PostViewController *ctrl = [[PostViewController alloc] init];
     ctrl.category = (int)sender.tag;
     [self.navigationController pushViewController:ctrl animated:YES];

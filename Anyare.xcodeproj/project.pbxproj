@@ -13,6 +13,7 @@
 		C66E2AC71BDA37810011DB1F /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C66E2AC61BDA37810011DB1F /* Helpers.m */; settings = {ASSET_TAGS = (); }; };
 		C66E2ACA1BDA3FB60011DB1F /* fire-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = C66E2AC91BDA3FB60011DB1F /* fire-pin.png */; settings = {ASSET_TAGS = (); }; };
 		DAAD8D61B3C78EC9759247C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DD9803F0E5641F57BF4D4C2 /* libPods.a */; };
+		E807879A1BDA465700825584 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = E80787991BDA465700825584 /* send.png */; settings = {ASSET_TAGS = (); }; };
 		E84BA4D91BD8D33A00649F6B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84BA4D81BD8D33A00649F6B /* CoreLocation.framework */; };
 		E84BA4E81BD8E4AD00649F6B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84BA4E71BD8E4AD00649F6B /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		E84BA4ED1BD8E5AF00649F6B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84BA4EB1BD8E5AF00649F6B /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
@@ -76,6 +77,7 @@
 		C66E2AC61BDA37810011DB1F /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		C66E2AC91BDA3FB60011DB1F /* fire-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire-pin.png"; sourceTree = "<group>"; };
 		D9ABC2F1A73EC05C40840BBD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E80787991BDA465700825584 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send.png; path = Images/send.png; sourceTree = SOURCE_ROOT; };
 		E84BA4D81BD8D33A00649F6B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E84BA4E71BD8E4AD00649F6B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../FacebookSDKs-iOS-20151007/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		E84BA4EB1BD8E5AF00649F6B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../FacebookSDKs-iOS-20151007/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				C66E2AC81BDA3FB60011DB1F /* Pins */,
+				E80787991BDA465700825584 /* send.png */,
 				E8A9E6E71BDA13AA0075C580 /* Tabs */,
 				E8A9E6DD1BDA0ACD0075C580 /* Categories */,
 			);
@@ -549,6 +552,7 @@
 				E8D81A741BD8BDE7008FC2D1 /* Main.storyboard in Resources */,
 				E8A9E6FD1BDA2EE70075C580 /* accident.png in Resources */,
 				E8A9E6F71BDA26CF0075C580 /* vandalism.png in Resources */,
+				E807879A1BDA465700825584 /* send.png in Resources */,
 				E8A9E6F61BDA26CF0075C580 /* drugs.png in Resources */,
 				E8A9E6E31BDA0AEC0075C580 /* theft.png in Resources */,
 				E8A9E6FA1BDA2BFA0075C580 /* assault.png in Resources */,
