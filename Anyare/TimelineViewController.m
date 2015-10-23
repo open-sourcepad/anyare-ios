@@ -41,7 +41,7 @@
         _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
         _mainTableView.dataSource = self;
         _mainTableView.delegate = self;
-        
+        _mainTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [_mainTableView registerClass:[PostTableViewCell class] forCellReuseIdentifier:@"PostCell"];
     }
     return _mainTableView;

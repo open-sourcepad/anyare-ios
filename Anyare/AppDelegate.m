@@ -215,12 +215,15 @@
 {
     CLLocation *location = [locations lastObject];
     [_locationManager stopUpdatingLocation];
-    // Save location
-    _currentLocationCoordinate = CGPointMake(location.coordinate.latitude, location.coordinate.longitude);
-    NSLog(@"Current location: (%f, %f)", location.coordinate.latitude, location.coordinate.longitude);
     
-    // Reload maps
-    [_mapVC reloadMap];
+    if(!_isLocationDetected) {
+        // Save location
+        _currentLocationCoordinate = CGPointMake(location.coordinate.latitude, location.coordinate.longitude);
+        NSLog(@"Current location: (%f, %f)", location.coordinate.latitude, location.coordinate.longitude);
+        
+        _isLocationDetected = YES;
+        [_mapVC reloadMap];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UserDM *currentUser;
 @property (strong, nonatomic) NSString *deviceToken;
 @property (nonatomic) CGPoint currentLocationCoordinate;
+@property (nonatomic) BOOL isLocationDetected;
 
 - (void)goToLogin;
 - (void)goToHome;
