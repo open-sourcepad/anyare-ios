@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "UserDM.h"
 
-@interface PostViewController ()
+@interface PostViewController () <PostControllerDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) UITextField *descriptionTextField;
 @property (strong, nonatomic) UIButton *postButton;
@@ -70,10 +70,13 @@
 
 - (void)postButtonAction:(id)sender
 {
-//    PostDM *post = [[PostDM alloc] init];
-//    post.category = self.category;
-//    post.location = @"";
-//    [PostController createPostWithDelegate:self post:post userToken:_appDelegate.currentUser];
+    NSLog(@"%@", _appDelegate.currentUser.authenticationToken);
+    PostDM *post = [[PostDM alloc] init];
+    post.category = self.category;
+    post.latitude = _appDelegate.currentLocationCoordinate.x;
+    post.longitude = _appDelegate.currentLocationCoordinate.y;
+    post.details   = self.descriptionTextField.text;
+    [PostController createPostWithDelegate:self post:post userToken:@"K8QgxRativvYA4QRsE2X"];
 }
 
 @end

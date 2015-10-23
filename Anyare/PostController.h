@@ -23,6 +23,7 @@
 + (void)createPostWithDelegate:(id <PostControllerDelegate>)delegate
                           post:(PostDM *)post
                      userToken:(NSString *)userToken;
+
 @end
 
 @protocol PostControllerDelegate <NSObject>
