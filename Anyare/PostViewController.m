@@ -13,9 +13,11 @@
 #import "PostDM.h"
 #import "AppDelegate.h"
 #import "UserDM.h"
+#import "Helpers.h"
 
 @interface PostViewController () <PostControllerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) UIImageView *categoryView;
 @property (strong, nonatomic) UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextField *descriptionTextField;
 @property (strong, nonatomic) UIButton *takePhotoButton;
@@ -33,8 +35,10 @@
 
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
      _post = [[PostDM alloc] init];
+    _post.category = [Helpers intToCategoryName:self.category];
 
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.categoryView];
     [self.view addSubview:self.descriptionLabel];
     [self.view addSubview:self.descriptionTextField];
     [self.view addSubview:self.imageView];
@@ -48,11 +52,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIImageView *)categoryView {
+    if(!_categoryView) {
+        CGFloat dimension = 45.0;
+        _categoryView = [[UIImageView alloc] initWithFrame:CGRectMake(10,
+                                                                      20,
+                                                                      dimension, dimension)];
+        _categoryView.image = [Helpers intToCategoryImage:self.category];
 
+        _categoryView.clipsToBounds = YES;
+    }
+    return _categoryView;
+}
 
 - (UILabel *)descriptionLabel {
     if (!_descriptionLabel) {
-        _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH-20, 45.0)];
+        _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryView.frame.size.width + self.categoryView.frame.origin.x + 5, 20, SCREEN_WIDTH-20, 45.0)];
         _descriptionLabel.text = @"Description";
     }
     
@@ -140,7 +155,6 @@
 
 - (void)postButtonAction:(id)sender
 {
-    _post.category = [self categoryName:self.category];
     _post.latitude = _appDelegate.currentLocationCoordinate.x;
     _post.longitude = _appDelegate.currentLocationCoordinate.y;
     _post.details   = self.descriptionTextField.text;
@@ -176,50 +190,6 @@
     [self presentViewController:picker animated:YES completion:NULL];
     
     
-}
-
-- (NSString *)categoryName: (int)i {
-    switch (i) {
-        case kCategoryFire: {
-            return CATEGORY_FIRE;
-        }
-            break;
-        case kCategoryFlood: {
-            return CATEGORY_FLOOD;
-        }
-            break;
-        case kCategoryTheft: {
-            return CATEGORY_THEFT;
-        }
-            break;
-        case kCategoryAccident: {
-            return CATEGORY_ACCIDENT;
-        }
-            break;
-        case kCategoryRoad: {
-            return CATEGORY_ROAD;
-        }
-            break;
-        case kCategoryWaterworks: {
-            return CATEGORY_WATERWORKS;
-        }
-            break;
-        case kCategoryAssault: {
-            return CATEGORY_ASSAULT;
-        }
-            break;
-        case kCategoryVandalism: {
-            return CATEGORY_VANDALISM;
-        }
-            break;
-        case kCategoryDrugs: {
-            return CATEGORY_DRUGS;
-        }
-            break;
-        default:
-            return CATEGORY_OTHERS;
-            break;
-    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
