@@ -40,7 +40,7 @@
 #define BTN_POST_DIMENSION                          70.0
 #define TIMELINE_CELL_ROW_HEIGHT                    70.0
 #define TIMELINE_WITH_IMAGE_TEXT_CELL_ROW_HEIGHT    290.0
-#define TIMELINE_WITH_TEXT_CELL_ROW_HEIGHT          100.0
+#define TIMELINE_WITH_TEXT_CELL_ROW_HEIGHT          90.0
 
 // COMMON
 #define NUMBER_OF_CATEGORIES                        9

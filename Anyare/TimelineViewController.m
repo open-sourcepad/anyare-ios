@@ -41,7 +41,7 @@
     if(_appDelegate.currentUser.authenticationToken) {
         [PostController getPostsInLocationWithDelegate:self
                                               location:_appDelegate.mapCurrentPoint
-                                             authToken:_appDelegate.currentUser.authenticationToken];        
+                                             authToken:_appDelegate.currentUser.authenticationToken];
     }
 }
 

@@ -61,12 +61,12 @@
         CGFloat originX = _iconImageView.frame.origin.x + _iconImageView.frame.size.width + kPostCellGap;
         _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX,
                                                                    _iconImageView.frame.origin.y,
-                                                                   self.frame.size.width-originX,
+                                                                   self.frame.size.width-originX-kPostCellPadding,
                                                                    35.0)];
         _locationLabel.numberOfLines = 2;
         _locationLabel.textColor = [UIColor darkGrayColor];
         _locationLabel.font = [UIFont systemFontOfSize:FONT_SIZE_NORMAL];
-        _locationLabel.text = @"2701 Discovery Suites, ADB Avenue, Ortigas Center, Pasig City";
+        _locationLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     }
     return _locationLabel;
 }
@@ -77,9 +77,9 @@
                                                                    _locationLabel.frame.origin.y + _locationLabel.frame.size.height,
                                                                    _locationLabel.frame.size.width,
                                                                    15.0)];
-        _dateTimeLabel.textColor = [UIColor darkGrayColor];
-        _dateTimeLabel.font = [UIFont systemFontOfSize:FONT_SIZE_NORMAL];
-        _dateTimeLabel.text = @"Date and time";
+        _dateTimeLabel.textColor = [UIColor grayColor];
+        _dateTimeLabel.font = [UIFont systemFontOfSize:(FONT_SIZE_NORMAL-2)];
+        _dateTimeLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     }
     return _dateTimeLabel;
 }
@@ -97,14 +97,16 @@
 
 - (UILabel *)detailLabel {
     if(!_detailLabel) {
-        CGFloat originX = _detailImageView.frame.origin.x;
+        CGFloat originX = kPostCellPadding;
         _detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX,
                                                                  _detailImageView.frame.origin.y+_detailImageView.frame.size.height,
                                                                  self.frame.size.width-(originX*2),
                                                                  20.0)];
         _detailLabel.textColor = [UIColor darkGrayColor];
-        _detailLabel.font = [UIFont systemFontOfSize:FONT_SIZE_NORMAL];
+        _detailLabel.font = [UIFont boldSystemFontOfSize:FONT_SIZE_NORMAL];
+        _detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _detailLabel.hidden = YES;
+        // Assume text is one line only
     }
     return _detailLabel;
 }
@@ -126,8 +128,12 @@
         _detailLabel.text = post.details;
         _detailLabel.hidden = NO;
         
+        CGRect detailFrame = _detailLabel.frame;
+        detailFrame.origin.x = kPostCellPadding;
+        _detailLabel.frame = detailFrame;
+        
         CGRect iconFrame = _iconImageView.frame;
-        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height + 5.0;
+        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height;
         _iconImageView.frame = iconFrame;
         
         CGRect addressFrame = _locationLabel.frame;
@@ -144,11 +150,13 @@
         _detailLabel.hidden = NO;
         
         CGRect detailFrame = _detailLabel.frame;
+        detailFrame.origin.x = _locationLabel.frame.origin.x;
         detailFrame.origin.y = kPostCellPadding;
+        detailFrame.size.width = self.frame.size.width-detailFrame.origin.x-kPostCellPadding;
         _detailLabel.frame = detailFrame;
         
         CGRect iconFrame = _iconImageView.frame;
-        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height + 5.0;
+        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height;
         _iconImageView.frame = iconFrame;
         
         CGRect addressFrame = _locationLabel.frame;
@@ -180,33 +188,55 @@
     NSString *category = post.category;
     UIImage *image;
     
+//    if ([category isEqualToString:CATEGORY_FIRE])
+//        image = [UIImage imageNamed:@"fire-pin"];
+//    else if ([category isEqualToString:CATEGORY_FLOOD])
+//        image = [UIImage imageNamed:@"flood-pin"];
+//    else if ([category isEqualToString:CATEGORY_THEFT])
+//        image = [UIImage imageNamed:@"theft-pin"];
+//    else if ([category isEqualToString:CATEGORY_ACCIDENT])
+//        image = [UIImage imageNamed:@"accident-pin"];
+//    else if ([category isEqualToString:CATEGORY_ROAD])
+//        image = [UIImage imageNamed:@"road-pin"];
+//    else if ([category isEqualToString:CATEGORY_WATERWORKS])
+//        image = [UIImage imageNamed:@"waterworks-pin"];
+//    else if ([category isEqualToString:CATEGORY_ASSAULT])
+//        image = [UIImage imageNamed:@"assault-pin"];
+//    else if ([category isEqualToString:CATEGORY_VANDALISM])
+//        image = [UIImage imageNamed:@"vandalism-pin"];
+//    else if ([category isEqualToString:CATEGORY_DRUGS])
+//        image = [UIImage imageNamed:@"drugs-pin"];
+    
     if ([category isEqualToString:CATEGORY_FIRE])
-        image = [UIImage imageNamed:@"fire-pin"];
+        image = [UIImage imageNamed:@"fire-cat"];
     else if ([category isEqualToString:CATEGORY_FLOOD])
-        image = [UIImage imageNamed:@"flood-pin"];
+        image = [UIImage imageNamed:@"flood"];
     else if ([category isEqualToString:CATEGORY_THEFT])
-        image = [UIImage imageNamed:@"theft-pin"];
+        image = [UIImage imageNamed:@"theft"];
     else if ([category isEqualToString:CATEGORY_ACCIDENT])
-        image = [UIImage imageNamed:@"accident-pin"];
+        image = [UIImage imageNamed:@"accident"];
     else if ([category isEqualToString:CATEGORY_ROAD])
-        image = [UIImage imageNamed:@"road-pin"];
+        image = [UIImage imageNamed:@"broken_road"];
     else if ([category isEqualToString:CATEGORY_WATERWORKS])
-        image = [UIImage imageNamed:@"waterworks-pin"];
+        image = [UIImage imageNamed:@"pipe"];
     else if ([category isEqualToString:CATEGORY_ASSAULT])
-        image = [UIImage imageNamed:@"assault-pin"];
+        image = [UIImage imageNamed:@"assault"];
     else if ([category isEqualToString:CATEGORY_VANDALISM])
-        image = [UIImage imageNamed:@"vandalism-pin"];
+        image = [UIImage imageNamed:@"vandalism"];
     else if ([category isEqualToString:CATEGORY_DRUGS])
-        image = [UIImage imageNamed:@"drugs-pin"];
+        image = [UIImage imageNamed:@"drugs"];
     
     _iconImageView.image = image;
     _locationLabel.text = post.address;
     
     // Date and time
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"MMMM d, yyyy hh:mm aa"];
-    NSDate *dateTime = [df dateFromString:post.dateTime];
-    _dateTimeLabel.text = [df stringFromDate:dateTime];
+    NSString *dateTimeString = post.dateTime;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
+    NSDate *date = [dateFormat dateFromString:dateTimeString];
 
+    NSDateFormatter *displayDateFormat = [[NSDateFormatter alloc] init];
+    [displayDateFormat setDateFormat:@"MMMM d, yyyy hh:mm aa"];
+    _dateTimeLabel.text = [displayDateFormat stringFromDate:date];
 }
 @end
