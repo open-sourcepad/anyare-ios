@@ -44,7 +44,7 @@ static PostController *singleton = nil;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 
     [params setObject:userToken forKey:@"auth_token"];
-    [params setObject:@"fire" forKey:@"post[category]"];
+    [params setObject:post.category forKey:@"post[category]"];
     [params setObject:post.details forKey:@"post[description]"];
     [params setObject:[[NSNumber numberWithFloat:post.latitude] stringValue] forKey:@"post[latitude]"];
     [params setObject:[[NSNumber numberWithFloat:post.longitude] stringValue] forKey:@"post[longitude]"];

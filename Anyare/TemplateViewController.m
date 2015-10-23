@@ -84,7 +84,7 @@
         
         for (int i=0; i<NUMBER_OF_CATEGORIES; i++) {
             CategoryButton *categoryBtn = [[CategoryButton alloc] initWithFrame:CGRectMake(x, y, dimension, dimension)];
-            categoryBtn.tag = kCategoryTag+i+1;
+            categoryBtn.tag = i;
             [categoryBtn addTarget:self action:@selector(categoryButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             
             switch (i) {

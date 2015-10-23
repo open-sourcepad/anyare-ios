@@ -13,11 +13,12 @@
 #import "AppDelegate.h"
 #import "UserDM.h"
 
-@interface PostViewController () <PostControllerDelegate>
+@interface PostViewController () <PostControllerDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextField *descriptionTextField;
 @property (strong, nonatomic) UIButton *postButton;
-@property (strong, nonatomic) NSArray *categories;
+
 
 @end
 
@@ -26,11 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    self.categories = [NSArray arrayWithObjects:@"fire", @"flood", @"theft", @"traffic", @"road", @"waterworks", @"assault", @"vandalism", @"drugs", nil];
-
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.descriptionLabel];
     [self.view addSubview:self.descriptionTextField];
     [self.view addSubview:self.postButton];
 }
@@ -41,12 +41,25 @@
 }
 
 
+
+- (UILabel *)descriptionLabel {
+    if (!_descriptionLabel) {
+        _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH-20, 45.0)];
+        _descriptionLabel.text = @"Description";
+    }
+    
+    return _descriptionLabel;
+}
+
 - (UITextField *)descriptionTextField {
     if (!_descriptionTextField) {
-        _descriptionTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH-20, 45.0)];
-//        _descriptionTextField.delegate = self;
+        _descriptionTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,
+                                                                              ( self.descriptionLabel.frame.size.height + 20 ),
+                                                                              SCREEN_WIDTH-20, 45.0)];
+                _descriptionTextField.delegate = self;
         _descriptionTextField.returnKeyType = UIReturnKeyDone;
-        _descriptionTextField.placeholder = @"Description";
+        _descriptionTextField.borderStyle = UITextBorderStyleLine;
+        _descriptionTextField.placeholder = @"Optional";
     }
     
     return _descriptionTextField;
@@ -57,7 +70,7 @@
     if(!_postButton) {
         _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _postButton.frame = CGRectMake(self.descriptionTextField.frame.origin.x,
-                                        ( self.descriptionTextField.frame.size.height + 20 ),
+                                        (self.descriptionTextField.frame.origin.y + self.descriptionTextField.frame.size.height + 20 ),
                                         self.descriptionTextField.frame.size.width,
                                         self.descriptionTextField.frame.size.height);
 
@@ -126,4 +139,9 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self postButtonAction:nil];
+    return YES;
+}
 @end
