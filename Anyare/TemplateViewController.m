@@ -97,7 +97,7 @@
                 }
                     break;
                 case kCategoryTraffic: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Traffic"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"traffic.png"] title:@"Traffic"];
                 }
                     break;
                 case kCategoryRoad: {
@@ -105,19 +105,19 @@
                 }
                     break;
                 case kCategoryWaterworks: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Water Works"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"pipe.png"] title:@"Water Work"];
                 }
                     break;
                 case kCategoryAssault: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Assault"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"assault.png"] title:@"Assault"];
                 }
                     break;
                 case kCategoryVandalism: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Vandalism"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"vandalism.png"] title:@"Vandalism"];
                 }
                     break;
                 case kCategoryDrugs: {
-                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"theft.png"] title:@"Drugs"];
+                    [categoryBtn setCategoryButtonImage:[UIImage imageNamed:@"drugs.png"] title:@"Drugs"];
                 }
                     break;
                 default:

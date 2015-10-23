@@ -13,6 +13,7 @@
 @interface MapViewController () <MGLMapViewDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) MGLMapView *mapView;
+@property (nonatomic) BOOL hasLoadedMap;
 @end
 
 @implementation MapViewController
@@ -28,6 +29,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if(!_hasLoadedMap) {
+        [self reloadMap];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +61,7 @@
 #pragma mark - Public
 - (void)reloadMap
 {
+    _hasLoadedMap = YES;
     [self.view addSubview:self.mapView];
 
     NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
