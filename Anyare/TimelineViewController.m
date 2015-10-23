@@ -8,10 +8,15 @@
 
 #import "TimelineViewController.h"
 #import "PostTableViewCell.h"
+#import "PostController.h"
+#import "AppDelegate.h"
+#import "UserDM.h"
+#import "PostDM.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) UITableView *mainTableView;
 @property (strong, nonatomic) NSMutableArray *posts;
+@property (strong, nonatomic) AppDelegate *appDelegate;
 @end
 
 @implementation TimelineViewController
@@ -19,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [self.view addSubview:self.mainTableView];
     self.navTitle = @"Timeline";
@@ -29,6 +36,12 @@
     
     [self.view bringSubviewToFront:self.postButton];
     [_mainTableView reloadData];
+    
+    if(!self.posts.count) {
+        [PostController getPostsInLocationWithDelegate:self
+                                              location:_appDelegate.currentLocationCoordinate
+                                             authToken:_appDelegate.currentUser.authenticationToken];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,8 +72,7 @@
 #pragma mark - Table View Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return self.posts.count;
-    return 10;
+    return _posts.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,4 +88,10 @@
     return cell;
 }
 
+#pragma mark - Post Controller Delegate
+- (void)getPostsDidFinish:(PostController *)controller resultDict:(NSDictionary *)resultDict
+{
+    _posts = [NSMutableArray arrayWithArray:[PostDM getPostsFromArray:(NSArray *)resultDict]];
+    [_mainTableView reloadData];
+}
 @end

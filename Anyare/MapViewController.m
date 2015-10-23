@@ -18,6 +18,7 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) MGLMapView *mapView;
 @property (strong, nonatomic) NSMutableArray *pins;
+@property (nonatomic) CGPoint currentPoint;
 @end
 
 @implementation MapViewController
@@ -59,15 +60,16 @@
 }
 
 #pragma mark - Public
-- (void)reloadMap
-{
-    [PostController getPostsInLocationWithDelegate:self
-                                          location:_appDelegate.currentLocationCoordinate
-                                         authToken:_appDelegate.currentUser.authenticationToken];
-}
+//- (void)reloadMap
+//{
+//    [PostController getPostsInLocationWithDelegate:self
+//                                          location:_appDelegate.currentLocationCoordinate
+//                                         authToken:_appDelegate.currentUser.authenticationToken];
+//}
 
 - (void)reloadMapAt:(CGPoint)point
 {
+    _currentPoint = point;
     [PostController getPostsInLocationWithDelegate:self
                                           location:point
                                          authToken:_appDelegate.currentUser.authenticationToken];
@@ -124,8 +126,14 @@
     // Remove all annotations
     //[mapView removeAnnotations:mapView.annotations];
     
+    NSLog(@"Current point (%f,%f)", _currentPoint.x, _currentPoint.y);
     NSLog(@"Region did change (%f,%f)", mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
-    //[self reloadMapAt:CGPointMake(mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude)];
+    CGPoint newPoint = CGPointMake(mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
+
+    //if(_currentPoint.x != newPoint.x || _currentPoint.y != newPoint.y)
+    if(![[NSString stringWithFormat:@"%.3f", _currentPoint.x] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.x]] ||
+       ![[NSString stringWithFormat:@"%.3f", _currentPoint.y] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.y]])
+        [self reloadMapAt:newPoint];
 }
 
 
@@ -134,8 +142,8 @@
 {
     [self.view addSubview:self.mapView];
     
-    NSLog(@"Load map: %f, %f", _appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
-    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.currentLocationCoordinate.x, _appDelegate.currentLocationCoordinate.y);
+    
+    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_currentPoint.x, _currentPoint.y);
     [_mapView setCenterCoordinate:locationCoordinate
                         zoomLevel:15
                          animated:NO];
@@ -149,7 +157,8 @@
         point.title = post.address;
         point.subtitle = post.category;
         [_mapView addAnnotation:point];
-        break;
+        
+        NSLog(@"Post %f, %f", post.latitude, post.longitude);
     }
     
     [self.view bringSubviewToFront:_mapView];

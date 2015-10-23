@@ -43,7 +43,7 @@
 - (UIButton *)postButton {
     if(!_postButton) {
         _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postButton.frame = CGRectMake(10.0, self.view.frame.size.height-230.0, BTN_POST_DIMENSION, BTN_POST_DIMENSION);
+        _postButton.frame = CGRectMake(10.0, self.view.frame.size.height-210.0, BTN_POST_DIMENSION, BTN_POST_DIMENSION);
         [_postButton addTarget:self action:@selector(postButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _postButton.backgroundColor = [UIColor whiteColor];
         _postButton.layer.cornerRadius = BTN_POST_DIMENSION/2;

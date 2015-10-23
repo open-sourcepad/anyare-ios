@@ -10,6 +10,6 @@
 #import "TemplateViewController.h"
 
 @interface MapViewController : TemplateViewController
-- (void)reloadMap;
+//- (void)reloadMap;
 - (void)reloadMapAt:(CGPoint)point;
 @end
