@@ -10,7 +10,7 @@
 
 @interface PostDM : NSObject
 @property (nonatomic) int postId;
-@property (nonatomic) int category;
+@property (strong, nonatomic) NSString *category;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 @property (strong, nonatomic) NSString *details;

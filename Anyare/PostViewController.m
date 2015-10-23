@@ -17,6 +17,7 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) UITextField *descriptionTextField;
 @property (strong, nonatomic) UIButton *postButton;
+@property (strong, nonatomic) NSArray *categories;
 
 @end
 
@@ -24,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+//    self.categories = [NSArray arrayWithObjects:@"fire", @"flood", @"theft", @"traffic", @"road", @"waterworks", @"assault", @"vandalism", @"drugs", nil];
 
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -70,13 +73,57 @@
 
 - (void)postButtonAction:(id)sender
 {
-    NSLog(@"%@", _appDelegate.currentUser.authenticationToken);
+    NSLog(@"TOKEN : %@", _appDelegate.currentUser.authenticationToken);
     PostDM *post = [[PostDM alloc] init];
-    post.category = self.category;
+    post.category = [self categoryName:self.category];
     post.latitude = _appDelegate.currentLocationCoordinate.x;
     post.longitude = _appDelegate.currentLocationCoordinate.y;
     post.details   = self.descriptionTextField.text;
-    [PostController createPostWithDelegate:self post:post userToken:@"K8QgxRativvYA4QRsE2X"];
+    [PostController createPostWithDelegate:self post:post userToken:@"zgGZwkG72YjJYoTv4xQK"];
+}
+
+- (NSString *)categoryName: (int)i {
+    switch (i) {
+        case kCategoryFire: {
+            return @"fire";
+        }
+            break;
+        case kCategoryFlood: {
+            return @"flood";
+        }
+            break;
+        case kCategoryTheft: {
+            return @"theft";
+        }
+            break;
+        case kCategoryTraffic: {
+            return @"accident";
+        }
+            break;
+        case kCategoryRoad: {
+            return @"road";
+        }
+            break;
+        case kCategoryWaterworks: {
+            return @"waterworks";
+        }
+            break;
+        case kCategoryAssault: {
+            return @"assault";
+        }
+            break;
+        case kCategoryVandalism: {
+            return @"vandalism";
+        }
+            break;
+        case kCategoryDrugs: {
+            return @"drugs";
+        }
+            break;
+        default:
+            return @"others";
+            break;
+    }
 }
 
 @end

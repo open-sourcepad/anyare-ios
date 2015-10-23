@@ -42,7 +42,13 @@ static PostController *singleton = nil;
     RKObjectManager *objMgr = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).apiObjMgr;
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+
     [params setObject:userToken forKey:@"auth_token"];
+    [params setObject:@"fire" forKey:@"post[category]"];
+    [params setObject:post.details forKey:@"post[description]"];
+    [params setObject:[[NSNumber numberWithFloat:post.latitude] stringValue] forKey:@"post[latitude]"];
+    [params setObject:[[NSNumber numberWithFloat:post.longitude] stringValue] forKey:@"post[longitude]"];
+
     
     [objMgr setAcceptHeaderWithMIMEType:API_HEADER];
     [objMgr.HTTPClient postPath:API_CREATE_POST

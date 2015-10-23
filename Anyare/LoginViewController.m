@@ -68,11 +68,10 @@
 - (void)signInUserDidFinish:(UserController *)controller resultDict:(NSDictionary *)resultDict
 {
     // Save current user
-    NSDictionary *userDict = [resultDict objectForKey:@"user"];
     UserDM *user = [[UserDM alloc] init];
-    user.userId = [[userDict objectForKey:@"id"] intValue];
-    user.email = [userDict objectForKey:@"email"];
-    user.authenticationToken = [userDict objectForKey:@"auth_token"];
+    user.userId = [[resultDict objectForKey:@"id"] intValue];
+    user.email = [resultDict objectForKey:@"email"];
+    user.authenticationToken = [resultDict objectForKey:@"auth_token"];
     _appDelegate.currentUser = user;
     
     [_appDelegate goToHome];
