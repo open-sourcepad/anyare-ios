@@ -23,8 +23,7 @@
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.navigationItem.title = @"Map";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.navTitle = @"Map";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,6 +70,8 @@
     point.title = @"Hello world!";
     point.subtitle = @"Welcome to The Ellipse.";
     [_mapView addAnnotation:point];
+    
+    [self.view bringSubviewToFront:self.postButton];
 }
 
 

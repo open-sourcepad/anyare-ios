@@ -41,6 +41,9 @@
                                                   NSFontAttributeName            : [UIFont boldSystemFontOfSize:18] };
     [[UINavigationBar appearance] setTitleTextAttributes:navBarTitleTextAttributes];
     
+    // RESTKIT
+    _apiObjMgr = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:API_BASE_URL]];
+    
     // LOCATION
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -130,7 +133,7 @@
         _tabController.selectedIndex = 0;
         [_tabController setViewControllers:[NSArray arrayWithObjects:
                                             self.mapNavController,
-                                            self.postNavController,
+                                            //self.postNavController,
                                             self.timelineNavController,
                                             nil]
                                   animated:YES];
@@ -142,7 +145,7 @@
     if(!_mapNavController) {
         _mapNavController = [[UINavigationController alloc] initWithRootViewController:self.mapVC];
         _mapNavController.title = @"Map";
-        //_mapNavController.tabBarItem.image = [UIImage imageNamed:@""];
+        _mapNavController.tabBarItem.image = [UIImage imageNamed:@"Map.png"];
     }
     return _mapNavController;
 }

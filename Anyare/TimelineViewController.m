@@ -21,6 +21,7 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.mainTableView];
+    self.navTitle = @"Timeline";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

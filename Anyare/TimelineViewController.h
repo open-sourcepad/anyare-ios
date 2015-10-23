@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TemplateViewController.h"
 
-@interface TimelineViewController : UIViewController
+@interface TimelineViewController : TemplateViewController
 
 @end

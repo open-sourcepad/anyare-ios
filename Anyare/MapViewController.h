@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TemplateViewController.h"
 
-@interface MapViewController : UIViewController
+@interface MapViewController : TemplateViewController
 - (void)reloadMap;
 
 @end
