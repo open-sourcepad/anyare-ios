@@ -45,10 +45,10 @@
         _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _postButton.frame = CGRectMake(10.0, self.view.frame.size.height-210.0, BTN_POST_DIMENSION, BTN_POST_DIMENSION);
         [_postButton addTarget:self action:@selector(postButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        _postButton.backgroundColor = [UIColor whiteColor];
+        _postButton.backgroundColor = [UIColor clearColor];
         _postButton.layer.cornerRadius = BTN_POST_DIMENSION/2;
         _postButton.layer.borderColor = COLOR_THEME.CGColor;
-        _postButton.layer.borderWidth = 5.0;
+        _postButton.layer.borderWidth = 3.0;
         _postButton.contentMode = UIViewContentModeScaleAspectFit;
         [_postButton setImage:[UIImage imageNamed:@"send.png"] forState:UIControlStateNormal];
     }

@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIView *photoView;
 @property (strong, nonatomic) UIButton *takePhotoButton;
 @property (strong, nonatomic) UIButton *chooseButton;
+@property (strong, nonatomic) UIView *postButtonView;
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) PostDM *post;
@@ -44,7 +45,7 @@
     [self.view addSubview:self.descriptionLabel];
     [self.view addSubview:self.descriptionTextField];
     [self.view addSubview:self.photoView];
-    [self.view addSubview:self.postButton];
+    [self.view addSubview:self.postButtonView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,6 +101,7 @@
         [_photoView addSubview:self.takePhotoButton];
         [_photoView addSubview:self.chooseButton];
         [_photoView addSubview:self.imageView];
+
     }
     
     return _photoView;
@@ -107,13 +109,11 @@
 
 - (UIImageView *)imageView {
     if(!_imageView) {
-        CGFloat width = (SCREEN_WIDTH/2)-10;
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(width,
-                                                                       0,
-                                                                       width, 100.0)];
-//        _imageView.backgroundColor = [UIColor grayColor];
-//        _imageView.layer.cornerRadius = _imageView.frame.size.width/2;
-//        _imageView.clipsToBounds = YES;
+        CGFloat width = (SCREEN_WIDTH/2)-20;
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2) - ((width/2)+10),
+                                                                       self.takePhotoButton.frame.origin.y + 10 + self.takePhotoButton.frame.size.height,
+                                                                       width, width)];
+        _imageView.backgroundColor = RGB(238, 240, 238);
     }
     return _imageView;
 }
@@ -138,8 +138,8 @@
 - (UIButton *)chooseButton {
     if(!_chooseButton) {
         _chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _chooseButton.frame = CGRectMake(0,
-                                       (self.takePhotoButton.frame.origin.y + self.takePhotoButton.frame.size.height + 10 ),
+        _chooseButton.frame = CGRectMake(self.takePhotoButton.frame.origin.x + self.takePhotoButton.frame.size.width + 1,
+                                       0,
                                        self.takePhotoButton.frame.size.width,
                                        self.takePhotoButton.frame.size.height);
         
@@ -152,18 +152,32 @@
     return _chooseButton;
 }
 
+- (UIView *)postButtonView {
+    if (!_postButtonView) {
+        _postButtonView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                   SCREEN_HEIGHT - (75 + 75 + 38),
+                                                                   SCREEN_WIDTH,
+                                                                   75)];
+        _postButtonView.backgroundColor = RGB(238, 240, 238);
+        [_postButtonView addSubview:self.postButton];
+    }
+    
+    return _postButtonView;
+}
+
 - (UIButton *)postButton {
     if(!_postButton) {
         _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postButton.frame = CGRectMake(self.photoView.frame.origin.x,
-                                        (self.photoView.frame.origin.y + self.photoView.frame.size.height + 20 ),
+        _postButton.frame = CGRectMake(10,
+                                        15,
                                         self.descriptionTextField.frame.size.width,
                                         self.descriptionTextField.frame.size.height);
 
         _postButton.backgroundColor = COLOR_THEME;
+        _postButton.layer.cornerRadius = 5;
         
         [_postButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_postButton setTitle:@"POST" forState:UIControlStateNormal];
+        [_postButton setTitle:@"POST ANYWAY" forState:UIControlStateNormal];
         [_postButton addTarget:self action:@selector(postButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _postButton;
