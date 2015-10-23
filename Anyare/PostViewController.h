@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PostViewController : UIViewController
-
+@property (nonatomic) int category;
 @end

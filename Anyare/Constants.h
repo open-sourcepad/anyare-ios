@@ -6,6 +6,9 @@
 //  Copyright © 2015 SourcePad. All rights reserved.
 //
 
+// DIMENSION
+#define SCREEN_WIDTH                                [[UIScreen mainScreen] bounds].size.width
+
 // API
 #define API_BASE_URL                                @"http://halloween-penguin.herokuapp.com"
 #define API_HEADER                                  @"application/vnd.halloween-penguin+json;version=1"

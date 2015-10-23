@@ -11,6 +11,7 @@
 #import "Constants.h"
 
 #import "CategoryButton.h"
+#import "PostViewController.h"
 
 @interface TemplateViewController ()
 @property (strong, nonatomic) UIView *categoryPopupView;
@@ -148,9 +149,13 @@
     // To do: animate
 }
 
-- (void)categoryButtonAction:(id)sender
+- (void)categoryButtonAction:(CategoryButton *)sender
 {
     
+    PostViewController *ctrl = [[PostViewController alloc] init];
+    ctrl.category = (int)sender.tag;
+    [self.navigationController pushViewController:ctrl animated:YES];
+    ctrl = nil;
 }
 
 #pragma mark - Private

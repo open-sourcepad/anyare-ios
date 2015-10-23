@@ -7,8 +7,16 @@
 //
 
 #import "PostViewController.h"
+#import "Constants.h"
+#import "PostController.h"
+#import "PostDM.h"
+#import "AppDelegate.h"
+#import "UserDM.h"
 
 @interface PostViewController ()
+@property (strong, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) UITextField *descriptionTextField;
+@property (strong, nonatomic) UIButton *postButton;
 
 @end
 
@@ -16,9 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.descriptionTextField];
+    [self.view addSubview:self.postButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,14 +37,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITextField *)descriptionTextField {
+    if (!_descriptionTextField) {
+        _descriptionTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH-20, 45.0)];
+//        _descriptionTextField.delegate = self;
+        _descriptionTextField.returnKeyType = UIReturnKeyDone;
+        _descriptionTextField.placeholder = @"Description";
+    }
+    
+    return _descriptionTextField;
 }
-*/
+
+
+- (UIButton *)postButton {
+    if(!_postButton) {
+        _postButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _postButton.frame = CGRectMake(self.descriptionTextField.frame.origin.x,
+                                        ( self.descriptionTextField.frame.size.height + 20 ),
+                                        self.descriptionTextField.frame.size.width,
+                                        self.descriptionTextField.frame.size.height);
+
+        _postButton.backgroundColor = RGB(34, 123, 129);
+        
+        [_postButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_postButton setTitle:@"POST" forState:UIControlStateNormal];
+        [_postButton addTarget:self action:@selector(postButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _postButton;
+}
+
+
+- (void)postButtonAction:(id)sender
+{
+//    PostDM *post = [[PostDM alloc] init];
+//    post.category = self.category;
+//    post.location = @"";
+//    [PostController createPostWithDelegate:self post:post userToken:_appDelegate.currentUser];
+}
 
 @end
