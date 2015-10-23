@@ -27,6 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.view bringSubviewToFront:self.postButton];
     [_mainTableView reloadData];
 }
 

@@ -11,5 +11,5 @@
 
 @interface MapViewController : TemplateViewController
 - (void)reloadMap;
-
+- (void)reloadMapAt:(CGPoint)point;
 @end

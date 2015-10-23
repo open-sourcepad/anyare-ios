@@ -173,43 +173,43 @@
 - (NSString *)categoryName: (int)i {
     switch (i) {
         case kCategoryFire: {
-            return @"fire";
+            return CATEGORY_FIRE;
         }
             break;
         case kCategoryFlood: {
-            return @"flood";
+            return CATEGORY_FLOOD;
         }
             break;
         case kCategoryTheft: {
-            return @"theft";
+            return CATEGORY_THEFT;
         }
             break;
-        case kCategoryTraffic: {
-            return @"accident";
+        case kCategoryAccident: {
+            return CATEGORY_ACCIDENT;
         }
             break;
         case kCategoryRoad: {
-            return @"road";
+            return CATEGORY_ROAD;
         }
             break;
         case kCategoryWaterworks: {
-            return @"waterworks";
+            return CATEGORY_WATERWORKS;
         }
             break;
         case kCategoryAssault: {
-            return @"assault";
+            return CATEGORY_ASSAULT;
         }
             break;
         case kCategoryVandalism: {
-            return @"vandalism";
+            return CATEGORY_VANDALISM;
         }
             break;
         case kCategoryDrugs: {
-            return @"drugs";
+            return CATEGORY_DRUGS;
         }
             break;
         default:
-            return @"others";
+            return CATEGORY_OTHERS;
             break;
     }
 }

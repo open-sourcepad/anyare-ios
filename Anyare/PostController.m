@@ -118,13 +118,9 @@ static PostController *singleton = nil;
                             NSError *error;
                             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
                             NSLog(@"Response: %@", responseDict);
-                            BOOL isSuccess = [[responseDict objectForKey:@"success"] boolValue];
-                            
-                            if(isSuccess) {
-                                NSDictionary *resultDict = [responseDict objectForKey:@"data"];
-                                if ([delegate respondsToSelector:@selector(getPostsDidFinish:resultDict:)])
-                                    [delegate performSelector:@selector(getPostsDidFinish:resultDict:) withObject:self withObject:resultDict];
-                            }
+                            NSDictionary *resultDict = [responseDict objectForKey:@"data"];
+                            if ([delegate respondsToSelector:@selector(getPostsDidFinish:resultDict:)])
+                                [delegate performSelector:@selector(getPostsDidFinish:resultDict:) withObject:self withObject:resultDict];
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             NSLog(@"Error: %@", error.localizedDescription);
                         }];

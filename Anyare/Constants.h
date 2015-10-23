@@ -42,11 +42,24 @@
 // COMMON
 #define NUMBER_OF_CATEGORIES                        9
 
+// CATEGORIES
+#define CATEGORY_FIRE                               @"fire"
+#define CATEGORY_FLOOD                              @"flood"
+#define CATEGORY_THEFT                              @"theft"
+#define CATEGORY_ACCIDENT                           @"accident"
+#define CATEGORY_ROAD                               @"road"
+#define CATEGORY_WATERWORKS                         @"waterworks"
+#define CATEGORY_ASSAULT                            @"assault"
+#define CATEGORY_VANDALISM                          @"vandalism"
+#define CATEGORY_DRUGS                              @"drugs"
+#define CATEGORY_OTHERS                             @"others"
+
+
 enum PostCategory {
     kCategoryFire = 0,
     kCategoryFlood,
     kCategoryTheft,
-    kCategoryTraffic,
+    kCategoryAccident,
     kCategoryRoad,
     kCategoryWaterworks,
     kCategoryAssault,
