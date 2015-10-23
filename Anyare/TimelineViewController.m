@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UserDM.h"
 #import "PostDM.h"
+#import "Constants.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) UITableView *mainTableView;
@@ -53,7 +54,10 @@
 - (UITableView *)mainTableView
 {
     if(!_mainTableView) {
-        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0,
+                                                                       0.0,
+                                                                       self.view.frame.size.width,
+                                                                       self.view.frame.size.height-_appDelegate.tabController.tabBar.frame.size.height)];
         _mainTableView.dataSource = self;
         _mainTableView.delegate = self;
         _mainTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -77,7 +81,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0;
+    // Check if post has details
+    PostDM *post = [_posts objectAtIndex:indexPath.row];
+    if(post.detailed)
+        return TIMELINE_WITH_IMAGE_TEXT_CELL_ROW_HEIGHT;
+    else if(post.details.length)
+        return TIMELINE_WITH_TEXT_CELL_ROW_HEIGHT;
+    else
+        return TIMELINE_CELL_ROW_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

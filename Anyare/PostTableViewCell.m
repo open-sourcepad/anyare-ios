@@ -12,16 +12,21 @@
 #import "Utility.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PostTableViewCell ()
 @property (strong, nonatomic) UIImageView *iconImageView;
 @property (strong, nonatomic) UILabel *locationLabel;
 @property (strong, nonatomic) UILabel *dateTimeLabel;
+
+@property (strong, nonatomic) UIImageView *detailImageView;
+@property (strong, nonatomic) UILabel *detailLabel;
 @end
 
 #define kPostCellPadding            10
 #define kPostCellGap                10
 #define kPostCellIconDimension      50
+#define kPostCellImageDimension     200
 
 @implementation PostTableViewCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -35,6 +40,9 @@
         [self addSubview:self.iconImageView];
         [self addSubview:self.locationLabel];
         [self addSubview:self.dateTimeLabel];
+        
+        [self addSubview:self.detailImageView];
+        [self addSubview:self.detailLabel];
     }
     return self;
 }
@@ -44,9 +52,6 @@
     if(!_iconImageView) {
         _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kPostCellPadding, kPostCellPadding, kPostCellIconDimension, kPostCellIconDimension)];
         _iconImageView.backgroundColor = [UIColor whiteColor];
-        _iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        _iconImageView.layer.borderWidth = 2.0;
-        _iconImageView.layer.cornerRadius = 8.0;
     }
     return _iconImageView;
 }
@@ -79,8 +84,99 @@
     return _dateTimeLabel;
 }
 
+- (UIImageView *)detailImageView {
+    if(!_detailImageView) {
+        _detailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kPostCellPadding, kPostCellPadding, kPostCellImageDimension, kPostCellImageDimension)];
+        _detailImageView.backgroundColor = [UIColor grayColor];
+        _detailImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _detailImageView.center = CGPointMake(self.frame.size.width/2, _detailImageView.center.y);
+        _detailImageView.hidden = YES;
+    }
+    return _detailImageView;
+}
+
+- (UILabel *)detailLabel {
+    if(!_detailLabel) {
+        CGFloat originX = _detailImageView.frame.origin.x;
+        _detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX,
+                                                                 _detailImageView.frame.origin.y+_detailImageView.frame.size.height,
+                                                                 self.frame.size.width-(originX*2),
+                                                                 20.0)];
+        _detailLabel.textColor = [UIColor darkGrayColor];
+        _detailLabel.font = [UIFont systemFontOfSize:FONT_SIZE_NORMAL];
+        _detailLabel.hidden = YES;
+    }
+    return _detailLabel;
+}
+
 - (void)createCellWithPost:(PostDM *)post
 {
+    if(post.detailed) {
+        // Post has details
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _detailImageView.image = nil;
+            [_detailImageView sd_setImageWithURL:[NSURL URLWithString:post.largeImageUrl]
+                                placeholderImage:nil
+                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                           _detailImageView.image = image;
+                                       }];
+        });
+        
+        _detailImageView.hidden = NO;
+        _detailLabel.text = post.details;
+        _detailLabel.hidden = NO;
+        
+        CGRect iconFrame = _iconImageView.frame;
+        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height + 5.0;
+        _iconImageView.frame = iconFrame;
+        
+        CGRect addressFrame = _locationLabel.frame;
+        addressFrame.origin.y = _iconImageView.frame.origin.y;
+        _locationLabel.frame = addressFrame;
+        
+        CGRect dateTimeFrame = _dateTimeLabel.frame;
+        dateTimeFrame.origin.y = _locationLabel.frame.origin.y + _locationLabel.frame.size.height;
+        _dateTimeLabel.frame = dateTimeFrame;
+    }
+    else if(post.details.length) {
+        _detailImageView.image = nil;
+        _detailLabel.text = post.details;
+        _detailLabel.hidden = NO;
+        
+        CGRect detailFrame = _detailLabel.frame;
+        detailFrame.origin.y = kPostCellPadding;
+        _detailLabel.frame = detailFrame;
+        
+        CGRect iconFrame = _iconImageView.frame;
+        iconFrame.origin.y = _detailLabel.frame.origin.y + _detailLabel.frame.size.height + 5.0;
+        _iconImageView.frame = iconFrame;
+        
+        CGRect addressFrame = _locationLabel.frame;
+        addressFrame.origin.y = _iconImageView.frame.origin.y;
+        _locationLabel.frame = addressFrame;
+        
+        CGRect dateTimeFrame = _dateTimeLabel.frame;
+        dateTimeFrame.origin.y = _locationLabel.frame.origin.y + _locationLabel.frame.size.height;
+        _dateTimeLabel.frame = dateTimeFrame;
+    }
+    else {
+        _detailImageView.image = nil;
+        _detailLabel.text = post.details;
+        
+        // Reset frames
+        CGRect iconFrame = _iconImageView.frame;
+        iconFrame.origin.y = kPostCellPadding;
+        _iconImageView.frame = iconFrame;
+        
+        CGRect addressFrame = _locationLabel.frame;
+        addressFrame.origin.y = _iconImageView.frame.origin.y;
+        _locationLabel.frame = addressFrame;
+        
+        CGRect dateTimeFrame = _dateTimeLabel.frame;
+        dateTimeFrame.origin.y = _locationLabel.frame.origin.y + _locationLabel.frame.size.height;
+        _dateTimeLabel.frame = dateTimeFrame;
+    }
+    
     NSString *category = post.category;
     UIImage *image;
     

@@ -26,6 +26,7 @@
     post.address = [dict objectForKey:@"address"];
     post.category = [dict objectForKey:@"category"];
     post.details = [dict objectForKey:@"description"];
+    post.detailed = [[dict objectForKey:@"detailed"] boolValue];
     
     post.largeImageUrl = [dict objectForKey:@"large"];
     post.mediumImageUrl = [dict objectForKey:@"medium"];
@@ -36,7 +37,6 @@
     post.latitude = [[dict objectForKey:@"latitude"] floatValue];
     post.longitude = [[dict objectForKey:@"longitude"] floatValue];
     
-    //post.dateTime = [[dict objectForKey:@"update_at"] longValue];
     post.dateTime = [dict objectForKey:@"updated_at"];
     
     // Save user
