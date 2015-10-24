@@ -122,6 +122,13 @@
     return _currentUser;
 }
 
+- (NSMutableArray *)loadedPosts {
+    if(!_loadedPosts) {
+        _loadedPosts = [[NSMutableArray alloc] init];
+    }
+    return _loadedPosts;
+}
+
 - (LoginViewController *)loginVC {
     if(!_loginVC) {
         _loginVC = [[LoginViewController alloc] init];

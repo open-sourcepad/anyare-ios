@@ -17,8 +17,6 @@
 @interface MapViewController () <MGLMapViewDelegate, PostControllerDelegate>
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) MGLMapView *mapView;
-@property (strong, nonatomic) NSMutableArray *pins;
-@property (nonatomic) CGPoint currentPoint;
 @property (nonatomic) BOOL firstLoad;
 @end
 
@@ -70,8 +68,12 @@
 #pragma mark - Public
 - (void)justReloadMap
 {
+    // Reload only if the user has already signed in
+    if(!self.appDelegate.currentUser.authenticationToken)
+        return;
+    
     [PostController getPostsInLocationWithDelegate:self
-                                          location:_currentPoint
+                                          location:_appDelegate.mapCurrentPoint
                                          authToken:_appDelegate.currentUser.authenticationToken];
 }
 
@@ -81,7 +83,7 @@
     if(!self.appDelegate.currentUser.authenticationToken)
         return;
     
-    _currentPoint = point;
+    _appDelegate.mapCurrentPoint = point;
     [PostController getPostsInLocationWithDelegate:self
                                           location:point
                                          authToken:_appDelegate.currentUser.authenticationToken];
@@ -138,12 +140,12 @@
     // Remove all annotations
     //[mapView removeAnnotations:mapView.annotations];
     
-    NSLog(@"Current point (%f,%f)", _currentPoint.x, _currentPoint.y);
+    NSLog(@"Current point (%f,%f)", _appDelegate.mapCurrentPoint.x, _appDelegate.mapCurrentPoint.y);
     NSLog(@"Region did change (%f,%f)", mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
     CGPoint newPoint = CGPointMake(mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude);
 
-    if(![[NSString stringWithFormat:@"%.3f", _currentPoint.x] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.x]] ||
-       ![[NSString stringWithFormat:@"%.3f", _currentPoint.y] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.y]])
+    if(![[NSString stringWithFormat:@"%.3f", _appDelegate.mapCurrentPoint.x] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.x]] ||
+       ![[NSString stringWithFormat:@"%.3f", _appDelegate.mapCurrentPoint.y] isEqualToString:[NSString stringWithFormat:@"%.3f", newPoint.y]])
         [self reloadMapAt:newPoint];
 }
 
@@ -154,18 +156,17 @@
     [self.view addSubview:self.mapView];
     
     if (_firstLoad) {
-        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_currentPoint.x, _currentPoint.y);
+        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(_appDelegate.mapCurrentPoint.x, _appDelegate.mapCurrentPoint.y);
         [_mapView setCenterCoordinate:locationCoordinate
                             zoomLevel:15
                              animated:NO];
         _firstLoad = NO;
     }
 
-    
-    NSArray *postsInLocation = [PostDM getPostsFromArray:(NSArray *)resultDict];
+    _appDelegate.loadedPosts = [[NSMutableArray alloc] initWithArray:[PostDM getPostsFromArray:(NSArray *)resultDict]];
     
     // Load all markers
-    for (PostDM *post in postsInLocation) {
+    for (PostDM *post in _appDelegate.loadedPosts) {
         MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
         point.coordinate = CLLocationCoordinate2DMake(post.latitude, post.longitude);
         point.title = post.address;
